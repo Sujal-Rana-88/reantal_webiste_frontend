@@ -8,7 +8,10 @@ const LendGameModal = ({ onClose, onSubmit }) => {
   const [formData, setFormData] = useState({
     gameName: "",
     lendingPeriod: "",
-    price: "", // Updated field to match the backend
+    price: "", 
+    tags: "",
+    about: "",
+    os: "",
     termsAccepted: false,
     image: null,
   });
@@ -69,6 +72,28 @@ const LendGameModal = ({ onClose, onSubmit }) => {
               type="text"
               name="gameName"
               value={formData.gameName}
+              onChange={handleChange}
+              className="w-full p-2 border rounded-md"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label>Lending Period</label>
+            <input
+              type="number"
+              name="lendingPeriod"
+              value={formData.lendingPeriod}
+              onChange={handleChange}
+              className="w-full p-2 border rounded-md"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label>Tags</label>
+            <input
+              type="number"
+              name="lendingPeriod"
+              value={formData.lendingPeriod}
               onChange={handleChange}
               className="w-full p-2 border rounded-md"
               required

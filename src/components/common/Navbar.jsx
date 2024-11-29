@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import logo from '../../assets/logo.png';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -21,23 +22,21 @@ const Navbar = () => {
 
   const toggleSidebar = () => {
     setSidebarOpen((prev) => !prev);
-    if (dropdownOpen) setDropdownOpen(false); // Close dropdown if open
+    if (dropdownOpen) setDropdownOpen(false); 
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // Close dropdown when clicking outside of it
       if (
         dropdownRef.current && !dropdownRef.current.contains(event.target) &&
-        !sidebarToggleRef.current.contains(event.target) // Ensure toggle button is also excluded
+        !sidebarToggleRef.current.contains(event.target) 
       ) {
         setDropdownOpen(false);
       }
   
-      // Close sidebar if clicked outside
       if (
         sidebarRef.current && !sidebarRef.current.contains(event.target) && 
-        !sidebarToggleRef.current.contains(event.target) // Ensure toggle button is also excluded
+        !sidebarToggleRef.current.contains(event.target) 
       ) {
         setSidebarOpen(false);
       }
@@ -61,13 +60,13 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="flex items-center justify-between fixed top-0 left-0 w-full bg-white shadow-md z-50 px-4 py-2">
+      <nav className="flex items-center justify-between fixed top-0 left-0  w-full bg-white shadow-md z-50 px-4 py-2">
         <div className="flex items-center space-x-4">
           <a href="/home" className="flex items-center space-x-3">
             <img
-              src="https://flowbite.com/docs/images/logo.svg"
+              src={logo}
               alt="Logo"
-              className="h-8"
+              className="h-12"
             />
             <span className="text-2xl font-semibold text-gray-800">Horizan Games</span>
           </a>
@@ -120,14 +119,14 @@ const Navbar = () => {
                 Services
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 className="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 to="/pricing"
               >
                 Pricing
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 className="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 "

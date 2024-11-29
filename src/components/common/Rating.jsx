@@ -5,7 +5,7 @@ const Rate = () => {
   const [rating, setRating] = useState(0);
 
   return (
-    <div className="flex justify-center items-center min-h-[60vh] text-[60px]">
+    <div className="flex justify-center items-center min-h-[60vh] text-[60px] py-20">
       {[...Array(5)].map((item, index) => {
         const givenRating = index + 1;
         return (

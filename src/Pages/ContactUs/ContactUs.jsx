@@ -6,7 +6,7 @@ const ContactUs = () => {
 
     <Navbar/>
 
-    <div className="flex flex-col items-center bg-gray-100 min-h-screen py-12">
+    <div className="flex flex-col items-center bg-gray-100 min-h-screen py-20">
       {/* Contact Us Header */}
       <div className="text-center mb-8">
         <h2 className="text-4xl font-bold text-gray-800">Contact Us</h2>

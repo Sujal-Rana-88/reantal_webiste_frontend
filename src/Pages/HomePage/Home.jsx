@@ -33,7 +33,7 @@ function Home() {
     <>
       <Navbar />
       <Featured />
-      <div className="overflow-x-auto whitespace-nowrap p-4">
+      <div className="overflow-x-auto whitespace-nowrap p-4 ">
         <div className="flex space-x-4">
           {loading ? (
             <p>Loading...</p>

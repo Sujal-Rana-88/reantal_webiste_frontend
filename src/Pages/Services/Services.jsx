@@ -5,7 +5,7 @@ const Services = () => {
   return (
     <>
       <Navbar/>
-      <div className="flex flex-col items-center bg-gray-100 min-h-screen py-12">
+      <div className="flex flex-col items-center bg-gray-100 min-h-screen py-20">
         {/* Header Section */}
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-800">Our Services</h1>
