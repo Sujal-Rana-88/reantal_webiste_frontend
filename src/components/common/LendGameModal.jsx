@@ -11,7 +11,6 @@ const LendGameModal = ({ onClose, onSubmit }) => {
     price: "", 
     tags: "",
     about: "",
-    os: "",
     termsAccepted: false,
     image: null,
   });
@@ -91,20 +90,20 @@ const LendGameModal = ({ onClose, onSubmit }) => {
           <div className="mb-4">
             <label>Tags</label>
             <input
-              type="number"
-              name="lendingPeriod"
-              value={formData.lendingPeriod}
+              type="text"
+              name="tags"
+              value={formData.tags}
               onChange={handleChange}
               className="w-full p-2 border rounded-md"
               required
             />
           </div>
           <div className="mb-4">
-            <label>Lending Period</label>
+            <label>About</label>
             <input
-              type="number"
-              name="lendingPeriod"
-              value={formData.lendingPeriod}
+              type="text"
+              name="about"
+              value={formData.about}
               onChange={handleChange}
               className="w-full p-2 border rounded-md"
               required
