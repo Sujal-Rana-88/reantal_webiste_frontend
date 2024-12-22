@@ -11,6 +11,7 @@ import AboutUs from "./Pages/AboutUs/AboutUs";
 import ContactUs from "./Pages/ContactUs/ContactUs";
 import UnauthorizedHome from "./Pages/Unauthorized/UnauthorizedHome";
 import Services from "./Pages/Services/Services";
+import RentGame from "./Pages/RentGame/RentGame";
 
 const isAuthenticated = () => {
   // Check if the user is authenticated
@@ -65,6 +66,14 @@ function App() {
         element={
           <ProtectedRoute>
             <ContactUs />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/rentgame"
+        element={
+          <ProtectedRoute>
+            <RentGame />
           </ProtectedRoute>
         }
       />

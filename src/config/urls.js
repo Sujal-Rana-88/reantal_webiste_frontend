@@ -7,10 +7,10 @@ const BASE_URL =
 const API_URLS = {
   LEND_GAME: `${BASE_URL}/games/lend`,
   FETCH_GAMES: `${BASE_URL}/games/all-games`,
-  LOGIN: `${BASE_URL}/auth/login`,
-  REGISTER: `${BASE_URL}/auth/register`,
+  LOGIN: `${BASE_URL}/login`,
+  REGISTER: `${BASE_URL}/register`,
   UPDATE_GAME: `${BASE_URL}/games/update`,
-  UPLOADS: `${BASE_URL}/uploads`
+  UPLOADS: `${BASE_URL}/uploads` 
 };
 
 export default API_URLS;

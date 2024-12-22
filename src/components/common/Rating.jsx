@@ -5,28 +5,32 @@ const Rate = () => {
   const [rating, setRating] = useState(0);
 
   return (
-    <div className="flex justify-center items-center min-h-[60vh] text-[60px] py-20">
-      {[...Array(5)].map((item, index) => {
-        const givenRating = index + 1;
-        return (
-          <label key={index} className="cursor-pointer">
-            <input
-              type="radio"
-              value={givenRating}
-              className="hidden"
-              onClick={() => {
-                setRating(givenRating);
-                alert(`Are you sure you want to give ${givenRating} stars?`);
-              }}
-            />
-            <div>
-              <FaStar
-                color={givenRating <= rating ? "#000" : "rgb(192,192,192)"}
-              />
-            </div>
-          </label>
-        );
-      })}
+    // <div className="flex justify-center items-center min-h-[60vh] text-[60px] py-20">
+    //   {[...Array(5)].map((item, index) => {
+    //     const givenRating = index + 1;
+    //     return (
+    //       <label key={index} className="cursor-pointer">
+    //         <input
+    //           type="radio"
+    //           value={givenRating}
+    //           className="hidden"
+    //           onClick={() => {
+    //             setRating(givenRating);
+    //             alert(`Are you sure you want to give ${givenRating} stars?`);
+    //           }}
+    //         />
+    //         <div>
+    //           <FaStar
+    //             color={givenRating <= rating ? "#000" : "rgb(192,192,192)"}
+    //           />
+    //         </div>
+    //       </label>
+    //     );
+    //   })}
+    // </div>
+
+    <div className="mt-16">
+
     </div>
   );
 };
