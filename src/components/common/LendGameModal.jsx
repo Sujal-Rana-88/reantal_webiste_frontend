@@ -36,11 +36,16 @@ const LendGameModal = ({ onClose, onSubmit }) => {
   };
 
   const handleAddTag = () => {
+    if (tagsList.length >= 3) {
+      alert("You can only add up to 3 tags.");
+      return;
+    }
+    
     if (formData.tags.trim() && !tagsList.includes(formData.tags.trim())) {
       setTagsList([...tagsList, formData.tags.trim()]);
       setFormData({ ...formData, tags: "" }); // Clear the input field after adding
     }
-  };
+  };  
 
   const handleRemoveTag = (tag) => {
     setTagsList(tagsList.filter((t) => t !== tag));
@@ -48,36 +53,31 @@ const LendGameModal = ({ onClose, onSubmit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!formData.termsAccepted) {
       alert("You must accept the terms and conditions to submit the form.");
       return;
     }
-    // use your algo where divide it with $ sign
-    // var tags = "";
-
+  
+    // Combine tags using $ as the separator
     const tags = tagsList.join("$");
-    console.log(tags);
-    
-    //! Prepare form data for submission
+  
     const formDataToSubmit = new FormData();
     formDataToSubmit.append("gameName", formData.gameName);
     formDataToSubmit.append("lendingPeriod", formData.lendingPeriod);
     formDataToSubmit.append("price", formData.price);
-    formDataToSubmit.append("tags", JSON.stringify(tagsList)); // Submit tags as JSON
+    formDataToSubmit.append("tags", tags); // Send tags as a $-separated string
     formDataToSubmit.append("about", formData.about);
     formDataToSubmit.append("image", formData.image);
-
+  
     try {
-      // Sending the request to the correct backend URL
       const response = await axios.post(API_URLS.LEND_GAME, formDataToSubmit, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
       });
-
-      // Handle success
+  
       console.log("Game lent successfully:", response.data);
       onSubmit(response.data);
       onClose();
@@ -86,9 +86,9 @@ const LendGameModal = ({ onClose, onSubmit }) => {
       alert("Failed to lend the game. Please try again.");
     }
   };
-
+  
   return (
-    <div className= "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center ">
+    <div className= "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center mt-16">
       <div className="bg-white p-8 rounded-lg w-full max-w-md">
         <h2 className="text-xl font-bold mb-4">Lend a Game</h2>
         <form onSubmit={handleSubmit}>

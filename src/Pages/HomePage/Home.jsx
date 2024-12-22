@@ -12,12 +12,9 @@ function Home() {
 
   useEffect(() => {
     const fetchGames = async () => {
-
       try {
         // Fetch data from the API endpoint
-        const response = await axios.get(
-          API_URLS.FETCH_GAMES
-        );
+        const response = await axios.get(API_URLS.FETCH_GAMES);
         setGames(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -26,38 +23,39 @@ function Home() {
       }
     };
 
-    fetchGames(); 
+    fetchGames();
   }, []);
 
   return (
     <>
       <Navbar />
       <Featured />
-      <div className="overflow-x-auto whitespace-nowrap p-4 ">
+      <div className="overflow-x-auto whitespace-nowrap p-4">
         <div className="flex space-x-4">
           {loading ? (
             <p>Loading...</p>
-          ) :
-           (
-            games.length > 0 ? ( 
-              games.map((game) => (
+          ) : games.length > 0 ? (
+            games.map((game) => {
+              const formattedTags = game.tags
+                .split("$")
+                .map((tag) => `#${tag}`)
+                .join(" "); // Convert "ForzaHorizon$Racing" to "#ForzaHorizon #Racing"
+
+              return (
                 <GameCard
-                  key={game.lendingId} 
+                  key={game.lendingId}
                   imageUrl={game.image}
-                  // imageUrl={`https://picsum.photos/200`}
                   about={game.about}
+                  tags={formattedTags} // Pass the formatted tags
                   gameName={game.gameName}
-                  rating={5} 
-                  price={game.price} 
+                  rating={5}
+                  price={game.price}
                 />
-              ))
-            ) 
-            : (
-              <p>No games available.</p>
-            )
-          )
-          
-          }
+              );
+            })
+          ) : (
+            <p>No games available.</p>
+          )}
         </div>
       </div>
       <Footer />

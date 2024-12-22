@@ -5,7 +5,6 @@ const ContactUs = () => {
   return (<>
 
     <Navbar/>
-
     <div className="flex flex-col items-center bg-gray-100 min-h-screen py-20">
       {/* Contact Us Header */}
       <div className="text-center mb-8">
@@ -53,10 +52,10 @@ const ContactUs = () => {
 
           {/* Contact Information */}
           <div className="mt-8 text-center">
-            <h3 className="text-xl font-semibold text-gray-800">Get in Touch</h3>
-            <p className="mt-2 text-gray-600">Email: support@yourwebsite.com</p>
-            <p className="text-gray-600">Phone: +1 (234) 567-8901</p>
-            <p className="text-gray-600">Address: 1234 Game St, Gamer City, GC 56789</p>
+            <h3 className="text-xl font-semibold text-gray-800">Get in Touch With Me</h3>
+            <p className="mt-2 text-gray-600">Email: rsrohan787@gmail.com</p>
+            <p className="text-gray-600">Phone: +91 90419 11113</p>
+            <p className="text-gray-600">Address: 12 hno gali shruti de pichli side rohin de bed de nal</p>
           </div>
         </div>
       </div>

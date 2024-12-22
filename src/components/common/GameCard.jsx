@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const GameCard = ({ imageUrl, gameName, rating, about, price }) => {
+const GameCard = ({ imageUrl, gameName, rating, about, price, tags }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalToggle = () => {
@@ -125,12 +125,16 @@ const GameCard = ({ imageUrl, gameName, rating, about, price }) => {
             {rating}
           </span>
         </div>
+        <p>
+          {tags}
+        </p>
 
         {/* Price and rent button */}
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold text-gray-900 dark:text-white">
             ₹{price}
           </span>
+          
           <Link
             to={{
               pathname: "/rentgame",
@@ -138,6 +142,7 @@ const GameCard = ({ imageUrl, gameName, rating, about, price }) => {
             state={{
               about,
               gameName,
+              tags,
               price,
               rating,
               imageUrl,
@@ -151,5 +156,4 @@ const GameCard = ({ imageUrl, gameName, rating, about, price }) => {
     </div>
   );
 };
-
 export default GameCard;
