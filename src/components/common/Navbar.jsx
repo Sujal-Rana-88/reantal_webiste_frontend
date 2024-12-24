@@ -10,7 +10,7 @@ const Navbar = () => {
   const sidebarRef = useRef(null); 
   const sidebarToggleRef = useRef(null);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const name = localStorage.getItem('user_id');
+  const name = localStorage.getItem('user_name');
   const email = localStorage.getItem('email');
 
   const handleSidebarItemClick = (itemName) => {
@@ -55,7 +55,7 @@ const Navbar = () => {
   const confirmLogout = () => {
     setShowLogoutModal(false);
     localStorage.removeItem("isAuthenticated");
-    localStorage.removeItem("user_id");
+    localStorage.removeItem("user_name");
     localStorage.removeItem("email");
     localStorage.removeItem("token");
     navigate("/");
