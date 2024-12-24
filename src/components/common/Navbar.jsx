@@ -10,6 +10,8 @@ const Navbar = () => {
   const sidebarRef = useRef(null); 
   const sidebarToggleRef = useRef(null);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const name = localStorage.getItem('user_id');
+  const email = localStorage.getItem('email');
 
   const handleSidebarItemClick = (itemName) => {
     console.log(`Clicked ${itemName}`);
@@ -54,6 +56,7 @@ const Navbar = () => {
     setShowLogoutModal(false);
     localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("user_id");
+    localStorage.removeItem("email");
     localStorage.removeItem("token");
     navigate("/");
   };
@@ -153,8 +156,8 @@ const Navbar = () => {
                 className="absolute right-0 mt-64  w-48 bg-white shadow-lg rounded-lg z-50"
               >
                 <div className="py-2">
-                  <span className="text-sm text-gray-800">Sujal Rana</span><div></div>
-                  <span className="text-xs text-gray-500">sujalranaop@gmail.com</span>
+                  <span className="text-sm text-gray-800">{name}</span><div></div>
+                  <span className="text-xs text-gray-500">{email}</span>
                 </div>
                 <ul className="py-2">
                   <li>

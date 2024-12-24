@@ -33,6 +33,7 @@ function Login() {
       // Store the token and set the authentication flag in local storage
       localStorage.setItem('token', response.data.access_token);
       localStorage.setItem('user_id', response.data.userId);
+      localStorage.setItem('email' , response.data.email);
       localStorage.setItem('isAuthenticated', 'true'); 
 
       setMessage(response.data.message || "Login successful!");
