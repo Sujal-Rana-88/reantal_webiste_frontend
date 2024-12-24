@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from '../../assets/logo.png';
 
 const Navbar = () => {
@@ -12,6 +12,10 @@ const Navbar = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const name = localStorage.getItem('user_name');
   const email = localStorage.getItem('email');
+  const [home, setHome] = useState(false);
+  const [about, setAbout] = useState(false);
+  const [services, setServices] = useState(false);
+  const [contact, setContact] = useState(false);
 
   const handleSidebarItemClick = (itemName) => {
     console.log(`Clicked ${itemName}`);
@@ -27,7 +31,35 @@ const Navbar = () => {
     if (dropdownOpen) setDropdownOpen(false); 
   };
 
+  const path = useLocation()
+
   useEffect(() => {
+ 
+    if(path.pathname === "/home"){
+      setHome(true);
+      setAbout(false);
+      setServices(false);
+      setContact(false);
+    }
+    else if(path.pathname === "/about"){
+      setHome(false);
+      setAbout(true);
+      setServices(false);
+      setContact(false);
+    }
+    else if(path.pathname === "/services"){
+      setHome(false);
+      setAbout(false);
+      setServices(true);
+      setContact(false);
+    }
+    else if(path.pathname === "/contact"){
+      setHome(false);
+      setAbout(false);
+      setServices(false);
+      setContact(true);
+    }
+
     const handleClickOutside = (event) => {
       if (
         dropdownRef.current && !dropdownRef.current.contains(event.target) &&
@@ -98,7 +130,7 @@ const Navbar = () => {
 
           {/* Links for larger screens */}
           <ul className="hidden md:flex md:space-x-8">
-            <li>
+            <li className={home ? "border-b-2 border-blue-700" : ""}>
               <Link
                 className="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 to="/home"
@@ -106,7 +138,7 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            <li>
+            <li className={about ? "border-b-2 border-blue-700" : ""}>
               <Link
                 className="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 to="/about"
@@ -114,7 +146,7 @@ const Navbar = () => {
                 About
               </Link>
             </li>
-            <li>
+            <li className={services ? "border-b-2 border-blue-700" : ""}>
               <Link
                 className="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 to="/services"
@@ -130,7 +162,7 @@ const Navbar = () => {
                 Pricing
               </Link>
             </li> */}
-            <li>
+            <li className={contact ? "border-b-2 border-blue-700" : ""}>
               <Link
                 className="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 "
                 to="/contact"
@@ -153,12 +185,13 @@ const Navbar = () => {
             {dropdownOpen && (
               <div
                 ref={dropdownRef}
-                className="absolute right-0 mt-64  w-48 bg-white shadow-lg rounded-lg z-50"
+                className="absolute right-0 mt-64 w-48 bg-white shadow-lg rounded-lg z-50"
               >
                 <div className="py-2">
-                  <span className="text-sm text-gray-800">{name}</span><div></div>
-                  <span className="text-xs text-gray-500">{email}</span>
+                  <span className="text-sm text-blue-800/65">{`${name.charAt(0).toUpperCase()}${name.substring(1)}`}</span><div></div>
+                  <span className="text-xs text-slate-500/85 shadow-sm">{email}</span>
                 </div>
+                <hr />
                 <ul className="py-2">
                   <li>
                     <Link
@@ -203,7 +236,7 @@ const Navbar = () => {
       {sidebarOpen && (
         <div
                 ref={sidebarRef}
-                className="absolute right-0 mt-14  w-48 bg-white shadow-lg  z-50"
+                className="absolute right-0 mt-14  w-48 bg-white shadow-lg  z-50 top-0 "
               >
                 <ul className="py-2">
                   <li>
@@ -211,7 +244,7 @@ const Navbar = () => {
                       to="/home"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
-                      home
+                      Home
                     </Link>
                   </li>
                   <li>
