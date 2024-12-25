@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import logo from '../../assets/logo.png';
+import logo from "../../assets/logo.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const sidebarRef = useRef(null); 
+  const sidebarRef = useRef(null);
   const sidebarToggleRef = useRef(null);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const name = localStorage.getItem('user_name');
-  const email = localStorage.getItem('email');
+  const name = localStorage.getItem("user_name");
+  const email = localStorage.getItem("email");
   const [home, setHome] = useState(false);
   const [about, setAbout] = useState(false);
   const [services, setServices] = useState(false);
@@ -28,32 +28,28 @@ const Navbar = () => {
 
   const toggleSidebar = () => {
     setSidebarOpen((prev) => !prev);
-    if (dropdownOpen) setDropdownOpen(false); 
+    if (dropdownOpen) setDropdownOpen(false);
   };
 
-  const path = useLocation()
+  const path = useLocation();
 
   useEffect(() => {
- 
-    if(path.pathname === "/home"){
+    if (path.pathname === "/home") {
       setHome(true);
       setAbout(false);
       setServices(false);
       setContact(false);
-    }
-    else if(path.pathname === "/about"){
+    } else if (path.pathname === "/about") {
       setHome(false);
       setAbout(true);
       setServices(false);
       setContact(false);
-    }
-    else if(path.pathname === "/services"){
+    } else if (path.pathname === "/services") {
       setHome(false);
       setAbout(false);
       setServices(true);
       setContact(false);
-    }
-    else if(path.pathname === "/contact"){
+    } else if (path.pathname === "/contact") {
       setHome(false);
       setAbout(false);
       setServices(false);
@@ -62,27 +58,28 @@ const Navbar = () => {
 
     const handleClickOutside = (event) => {
       if (
-        dropdownRef.current && !dropdownRef.current.contains(event.target) &&
-        !sidebarToggleRef.current.contains(event.target) 
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        !sidebarToggleRef.current.contains(event.target)
       ) {
         setDropdownOpen(false);
       }
-  
+
       if (
-        sidebarRef.current && !sidebarRef.current.contains(event.target) && 
-        !sidebarToggleRef.current.contains(event.target) 
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target) &&
+        !sidebarToggleRef.current.contains(event.target)
       ) {
         setSidebarOpen(false);
       }
     };
-  
+
     document.addEventListener("mousedown", handleClickOutside);
-  
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  
 
   const confirmLogout = () => {
     setShowLogoutModal(false);
@@ -98,12 +95,10 @@ const Navbar = () => {
       <nav className="flex items-center justify-between fixed top-0 left-0  w-full bg-white shadow-md z-50 px-4 py-2">
         <div className="flex items-center space-x-4">
           <a href="/home" className="flex items-center space-x-3">
-            <img
-              src={logo}
-              alt="Logo"
-              className="h-12"
-            />
-            <span className="text-2xl font-semibold text-gray-800">Horizan Games</span>
+            <img src={logo} alt="Logo" className="h-12" />
+            <span className="text-2xl font-semibold text-gray-800">
+              Horizan Games
+            </span>
           </a>
         </div>
 
@@ -188,8 +183,18 @@ const Navbar = () => {
                 className="absolute right-0 mt-64 w-48 bg-white shadow-lg rounded-lg z-50"
               >
                 <div className="py-2">
+<<<<<<< HEAD
                   <span className="text-[16px] font-semibold text-blue-800/65">{`${name.charAt(0).toUpperCase()}${name.substring(1)}`}</span><div></div>
                   <span className="text-xs text-slate-500/85 shadow-sm">{email}</span>
+=======
+                  <span className="text-sm text-blue-800/65">{`${name
+                    .charAt(0)
+                    .toUpperCase()}${name.substring(1)}`}</span>
+                  <div></div>
+                  <span className="text-xs text-slate-500/85 shadow-sm">
+                    {email}
+                  </span>
+>>>>>>> 9b023538a76382a8dafd751d500edea657624f8b
                 </div>
                 <hr />
                 <ul className="py-2">
@@ -234,61 +239,54 @@ const Navbar = () => {
 
       {/* Sidebar for smaller screens */}
       {sidebarOpen && (
-        <div
-                ref={sidebarRef}
-                className="absolute right-0 mt-14  w-48 bg-white shadow-lg  z-50 top-0 "
-              >
-                <ul className="py-2">
-                  <li>
-                    <Link
-                      to="/home"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li>
-                    <a
-                      href="/about"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      About us
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Services
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Pricing
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/contact"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Contact
-                    </a>
-                  </li>
-                  
-                </ul>
-              </div>
-      )}
+  <div
+    ref={sidebarRef}
+    className="fixed right-0 mt-14 w-48 bg-white shadow-lg z-50 top-0"
+  >
+    <ul className="py-2">
+      <li>
+        <Link
+          to="/home"
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+        >
+          Home
+        </Link>
+      </li>
+      <li>
+        <a
+          href="/about"
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+        >
+          About us
+        </a>
+      </li>
+      <li>
+        <a
+          href="/services"
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+        >
+          Services
+        </a>
+      </li>
+      <li>
+        <a
+          href="/contact"
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+        >
+          Contact
+        </a>
+      </li>
+    </ul>
+  </div>
+)}
 
       {/* Logout Modal */}
       {showLogoutModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
-            <h2 className="text-lg font-bold text-center">Are you sure you want to logout?</h2>
+            <h2 className="text-lg font-bold text-center">
+              Are you sure you want to logout?
+            </h2>
             <div className="flex justify-center space-x-4 mt-4">
               <button
                 onClick={confirmLogout}
