@@ -13,8 +13,23 @@ function Home() {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        // Fetch data from the API endpoint
-        const response = await axios.get(API_URLS.FETCH_GAMES);
+        // Sample data to send with the POST request (you can modify this according to your needs)
+        const userId = localStorage.getItem("user_id");
+        const requestData = {
+          userId: userId
+        };
+
+        // Sending a POST request to fetch games
+        // const response = await axios.post(API_URLS.FETCH_GAMES, requestData);
+        const token = localStorage.getItem("token"); // or from another source like a context API
+
+      const response = await axios.post(API_URLS.FETCH_GAMES, requestData, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      })
+
+        // Update the games state with the response data
         setGames(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);

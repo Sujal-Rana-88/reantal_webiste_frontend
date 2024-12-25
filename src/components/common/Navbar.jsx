@@ -87,8 +87,11 @@ const Navbar = () => {
     localStorage.removeItem("user_name");
     localStorage.removeItem("email");
     localStorage.removeItem("token");
-    navigate("/");
+  
+    // Replace the current route with the homepage
+    navigate("/", { replace: true });
   };
+  
 
   return (
     <>

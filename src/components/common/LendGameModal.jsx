@@ -4,6 +4,7 @@ import API_URLS from '../../config/urls.js';
 
 const LendGameModal = ({ onClose, onSubmit }) => {
   const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("user_id");
 
   const [formData, setFormData] = useState({
     gameName: "",
@@ -58,7 +59,6 @@ const LendGameModal = ({ onClose, onSubmit }) => {
       alert("You must accept the terms and conditions to submit the form.");
       return;
     }
-  
     // Combine tags using $ as the separator
     const tags = tagsList.join("$");
   
@@ -68,6 +68,7 @@ const LendGameModal = ({ onClose, onSubmit }) => {
     formDataToSubmit.append("price", formData.price);
     formDataToSubmit.append("tags", tags); // Send tags as a $-separated string
     formDataToSubmit.append("about", formData.about);
+    formDataToSubmit.append("userId", userId);
     formDataToSubmit.append("image", formData.image);
   
     try {
