@@ -188,7 +188,7 @@ const Navbar = () => {
                 className="absolute right-0 mt-64 w-48 bg-white shadow-lg rounded-lg z-50"
               >
                 <div className="py-2">
-                  <span className="text-sm text-blue-800/65">{`${name.charAt(0).toUpperCase()}${name.substring(1)}`}</span><div></div>
+                  <span className="text-[16px] font-semibold text-blue-800/65">{`${name.charAt(0).toUpperCase()}${name.substring(1)}`}</span><div></div>
                   <span className="text-xs text-slate-500/85 shadow-sm">{email}</span>
                 </div>
                 <hr />
