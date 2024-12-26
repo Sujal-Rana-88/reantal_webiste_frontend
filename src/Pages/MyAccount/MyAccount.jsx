@@ -8,6 +8,7 @@ import { Rating } from "@material-tailwind/react";
 import Rate from "../../components/common/Rating";
 import UserLendedGamesCard from "../../components/common/UserLendedGamesCard";
 import API_URLS from '../../config/urls';
+import Footer from "../../components/common/Footer";
 
 const MyAccount = () => {
   const [showModal, setShowModal] = useState(false);
@@ -71,7 +72,7 @@ const MyAccount = () => {
           onClose={handleHideModal}
         />
       )}
-       <div className="flex space-x-4">
+       <div className="flex space-x-4 min-h-screen">
           {loading ? (
             <p>Loading...</p>
           ) : games.length > 0 ? (
@@ -97,6 +98,7 @@ const MyAccount = () => {
             <p>No Lended games.</p>
           )}
         </div>
+        <Footer />
     </>
   );
 };

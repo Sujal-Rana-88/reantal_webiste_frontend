@@ -186,7 +186,7 @@ const Navbar = () => {
                 className="absolute right-0 mt-64 w-48 bg-white shadow-lg rounded-lg z-50"
               >
                 <div className="py-2">
-                  <span className="text-sm text-blue-800/65">{`${name
+                  <span className="text-[16px] font-semibold text-blue-800/65">{`${name
                     .charAt(0)
                     .toUpperCase()}${name.substring(1)}`}</span>
                   <div></div>
@@ -202,6 +202,14 @@ const Navbar = () => {
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       Dashboard
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Profile
                     </Link>
                   </li>
                   <li>
