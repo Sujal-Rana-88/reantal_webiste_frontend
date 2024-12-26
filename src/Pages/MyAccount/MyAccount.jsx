@@ -7,9 +7,7 @@ import LendGameModal from "../../components/common/LendGameModal";
 import { Rating } from "@material-tailwind/react";
 import Rate from "../../components/common/Rating";
 import UserLendedGamesCard from "../../components/common/UserLendedGamesCard";
-import API_URLS from "../../config/urls";
-import LoadingSpinner from "../../components/common/LoadingSpinner";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import API_URLS from '../../config/urls';
 
 const MyAccount = () => {
   const [showModal, setShowModal] = useState(false);
@@ -85,8 +83,32 @@ const MyAccount = () => {
           onClose={handleHideModal}
         />
       )}
-      
+       <div className="flex space-x-4">
+          {loading ? (
+            <p>Loading...</p>
+          ) : games.length > 0 ? (
+            games.map((game) => {
+              const formattedTags = game.tags
+                .split("$")
+                .map((tag) => `#${tag}`)
+                .join(" "); // Convert "ForzaHorizon$Racing" to "#ForzaHorizon #Racing"
 
+              return (
+                <UserLendedGamesCard
+                  key={game.lendingId}
+                  imageUrl={game.image}
+                  about={game.about}
+                  tags={formattedTags} // Pass the formatted tags
+                  gameName={game.gameName}
+                  rating={5}
+                  price={game.price}
+                />
+              );
+            })
+          ) : (
+            <p>No Lended games.</p>
+          )}
+        </div>
     </>
   );
 };

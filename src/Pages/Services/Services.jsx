@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../../components/common/Navbar';
+import Footer from '../../components/common/Footer';
 
 const Services = () => {
   return (
@@ -99,6 +100,7 @@ const Services = () => {
         </div>
 
       </div>
+      <Footer />
     </>
   );
 };
