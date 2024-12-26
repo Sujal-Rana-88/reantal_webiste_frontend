@@ -12,6 +12,7 @@ import ContactUs from "./Pages/ContactUs/ContactUs";
 import UnauthorizedHome from "./Pages/Unauthorized/UnauthorizedHome";
 import Services from "./Pages/Services/Services";
 import RentGame from "./Pages/RentGame/RentGame";
+import Profile from "./Pages/Profile/Profile";
 
 const isAuthenticated = () => {
   // Check if the user is authenticated
@@ -74,6 +75,14 @@ function App() {
         element={
           <ProtectedRoute>
             <RentGame />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
           </ProtectedRoute>
         }
       />
