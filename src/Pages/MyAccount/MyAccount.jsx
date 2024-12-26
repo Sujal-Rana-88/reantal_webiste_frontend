@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "../../components/common/Navbar";
 import ProfileCard from "../../components/common/ProfileCard";
 import Notification from "../../components/common/Notification";
 import LendGameModal from "../../components/common/LendGameModal";
-import { Rating } from "@material-tailwind/react";
 import Rate from "../../components/common/Rating";
-import UserLendedGamesCard from "../../components/common/UserLendedGamesCard";
-import API_URLS from '../../config/urls';
 
 const MyAccount = () => {
   const [showModal, setShowModal] = useState(false);
@@ -15,41 +12,6 @@ const MyAccount = () => {
 
   const handleShowModal = () => setShowModal(true);
   const handleHideModal = () => setShowModal(false);
-  const [games, setGames] = useState([]); // State to store games data
-  const [loading, setLoading] = useState(true); // Loading state for API call
-
-  useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        // Fetch data from the API endpoint
-        const userId = localStorage.getItem("user_id");
-        const requestData = {
-          userId: userId,
-        };
-
-        // Sending a POST request to fetch games
-        // const response = await axios.post(API_URLS.FETCH_GAMES, requestData);
-        const token = localStorage.getItem("token"); // or from another source like a context API
-
-        const response = await axios.post(
-          API_URLS.FETCH_USER_LENDED_GAMES,
-          requestData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setGames(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchGames();
-  }, []);
 
   const handleLendGame = (data) => {
     setNotification({
@@ -57,7 +19,17 @@ const MyAccount = () => {
       message: "Game lent successfully!",
       type: "success",
     });
+
+    // Automatically hide notification after 3 seconds
+    setTimeout(() => {
+      setNotification((prev) => ({ ...prev, visible: false }));
+    }, 3000);
+
     handleHideModal();
+  };
+
+  const closeNotification = () => {
+    setNotification((prev) => ({ ...prev, visible: false }));
   };
 
   return (
@@ -65,17 +37,16 @@ const MyAccount = () => {
       <Navbar />
       <Rate />
       <ProfileCard onLendGameClick={handleShowModal} />
-      <Notification notification={notification} />
-      <div class="flex justify-end">
+      <Notification notification={notification} closeNotification={closeNotification} />
+      <div className="flex justify-end">
         <Link
           to="/LendGameHistory"
-          class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500 mr-2 md:mr-4 lg:mr-6"
+          className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500 mr-2 md:mr-4 lg:mr-6"
         >
           History
         </Link>
       </div>
 
-      {/* <LoadingSpinner/> */}
       {showModal && (
         <LendGameModal
           onSubmit={handleLendGame}
@@ -83,32 +54,6 @@ const MyAccount = () => {
           onClose={handleHideModal}
         />
       )}
-       <div className="flex space-x-4">
-          {loading ? (
-            <p>Loading...</p>
-          ) : games.length > 0 ? (
-            games.map((game) => {
-              const formattedTags = game.tags
-                .split("$")
-                .map((tag) => `#${tag}`)
-                .join(" "); // Convert "ForzaHorizon$Racing" to "#ForzaHorizon #Racing"
-
-              return (
-                <UserLendedGamesCard
-                  key={game.lendingId}
-                  imageUrl={game.image}
-                  about={game.about}
-                  tags={formattedTags} // Pass the formatted tags
-                  gameName={game.gameName}
-                  rating={5}
-                  price={game.price}
-                />
-              );
-            })
-          ) : (
-            <p>No Lended games.</p>
-          )}
-        </div>
     </>
   );
 };

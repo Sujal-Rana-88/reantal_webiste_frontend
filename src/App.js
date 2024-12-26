@@ -13,6 +13,7 @@ import UnauthorizedHome from "./Pages/Unauthorized/UnauthorizedHome";
 import Services from "./Pages/Services/Services";
 import RentGame from "./Pages/RentGame/RentGame";
 import LendGameHistory from "./Pages/LendGamesHistory/LendGameHistory";
+import Profile from "./Pages/Profile/Profile"
 
 const isAuthenticated = () => {
   // Check if the user is authenticated
@@ -86,14 +87,14 @@ function App() {
           </ProtectedRoute>
         }
       />
-      <Route
+      {/* <Route
         path="/profile"
         element={
           <ProtectedRoute>
             <Profile />
           </ProtectedRoute>
         }
-      />
+      /> */}
 
       <Route path="*" element={<NotFound />} />
     </Routes>

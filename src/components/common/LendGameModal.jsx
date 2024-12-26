@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import API_URLS from '../../config/urls.js';
+import LoadingButton from "./LoadingButton.jsx";
 
 const LendGameModal = ({ onClose, onSubmit }) => {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("user_id");
+  const [loading, setLoading] = useState(false); 
 
   const [formData, setFormData] = useState({
     gameName: "",
@@ -52,25 +54,26 @@ const LendGameModal = ({ onClose, onSubmit }) => {
     setTagsList(tagsList.filter((t) => t !== tag));
   };
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!formData.termsAccepted) {
       alert("You must accept the terms and conditions to submit the form.");
       return;
     }
-    // Combine tags using $ as the separator
+
     const tags = tagsList.join("$");
-  
+
     const formDataToSubmit = new FormData();
     formDataToSubmit.append("gameName", formData.gameName);
     formDataToSubmit.append("lendingPeriod", formData.lendingPeriod);
     formDataToSubmit.append("price", formData.price);
-    formDataToSubmit.append("tags", tags); // Send tags as a $-separated string
+    formDataToSubmit.append("tags", tags);
     formDataToSubmit.append("about", formData.about);
     formDataToSubmit.append("userId", userId);
     formDataToSubmit.append("image", formData.image);
-  
+
+    setLoading(true); // Show loader
     try {
       const response = await axios.post(API_URLS.LEND_GAME, formDataToSubmit, {
         headers: {
@@ -78,13 +81,15 @@ const LendGameModal = ({ onClose, onSubmit }) => {
           "Content-Type": "multipart/form-data",
         },
       });
-  
+
       console.log("Game lent successfully:", response.data);
       onSubmit(response.data);
       onClose();
     } catch (error) {
       console.error("Error lending the game:", error.response?.data || error.message);
       alert("Failed to lend the game. Please try again.");
+    } finally {
+      setLoading(false); // Hide loader
     }
   };
   
@@ -202,8 +207,43 @@ const LendGameModal = ({ onClose, onSubmit }) => {
             >
               Cancel
             </button>
-            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
+            {/* <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
               Submit
+            </button> */}
+            <button
+              type="submit"
+              className={`bg-blue-500 text-white px-4 py-2 rounded-md flex items-center justify-center ${
+                loading ? "cursor-not-allowed opacity-70" : ""
+              }`}
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <svg
+                    className="w-5 h-5 mr-2 text-white animate-spin"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    ></path>
+                  </svg>
+                  Loading...
+                </>
+              ) : (
+                "Submit"
+              )}
             </button>
           </div>
         </form>
