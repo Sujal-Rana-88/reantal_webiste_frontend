@@ -2,6 +2,31 @@ import React from 'react';
 import Navbar from '../../components/common/Navbar';
 import Footer from '../../components/common/Footer';
 
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  const formData = {
+    name: event.target.name.value,
+    email: event.target.email.value,
+    message: event.target.message.value,
+  };
+
+  try {
+    const response = await fetch('http://localhost:5000/send-message', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+    if (response.ok) {
+      alert('Message sent successfully!');
+    } else {
+      alert('There was an error sending your message.');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('There was an error sending your message.');
+  }
+};
+
 const ContactUs = () => {
   return (<>
 
@@ -19,7 +44,7 @@ const ContactUs = () => {
       <div className="w-full px-4 md:px-0 md:w-2/3 lg:w-1/2">
         <div className="bg-white rounded-lg shadow-lg p-8 space-y-6">
           {/* Contact Form */}
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label className="block text-gray-700 font-medium">Your Name</label>
               <input

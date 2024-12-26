@@ -38,6 +38,24 @@ const LendGameModal = ({ onClose, onSubmit }) => {
     }
   };
 
+  const handleAboutChange = (e) => {
+    const { name, value, type, checked, files } = e.target;
+    
+    // Regular expression to allow letters, numbers, spaces, and special characters
+    const validCharactersRegex = /^[a-zA-Z0-9\s!@#$%^&*()_+={}\[\]:;"'<>,.?/\\|`~-]*$/;
+  
+    if (type === "checkbox") {
+      setFormData({ ...formData, [name]: checked });
+    } else if (type === "file") {
+      setFormData({ ...formData, image: files[0] });
+    } else {
+      // Validate input value
+      if (validCharactersRegex.test(value) || value === "") {
+        setFormData({ ...formData, [name]: value });
+      }
+    }
+  };
+  
   const handleAddTag = () => {
     if (tagsList.length >= 3) {
       alert("You can only add up to 3 tags.");
@@ -62,6 +80,10 @@ const LendGameModal = ({ onClose, onSubmit }) => {
       return;
     }
 
+  if (formData.about.length > 250) {
+    alert("The 'About' field must not exceed 250 characters.");
+    return;
+  }
     const tags = tagsList.join("$");
 
     const formDataToSubmit = new FormData();
@@ -163,7 +185,7 @@ const LendGameModal = ({ onClose, onSubmit }) => {
               type="text"
               name="about"
               value={formData.about}
-              onChange={handleChange}
+              onChange={handleAboutChange}
               className="w-full p-2 border rounded-md"
               required
             />
