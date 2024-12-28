@@ -72,6 +72,7 @@ const LendGameHistory = () => {
                 about={game.about}
                 tags={formattedTags}
                 gameName={game.gameName}
+                category = {game.category}
                 rating={5}
                 price={game.price}
               />

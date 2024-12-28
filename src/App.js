@@ -87,14 +87,14 @@ function App() {
           </ProtectedRoute>
         }
       />
-      {/* <Route
-        path="/profile"
+      <Route
+        path="/settings"
         element={
           <ProtectedRoute>
             <Profile />
           </ProtectedRoute>
         }
-      /> */}
+      />
 
       <Route path="*" element={<NotFound />} />
     </Routes>

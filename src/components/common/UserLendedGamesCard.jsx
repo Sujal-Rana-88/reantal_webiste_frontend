@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const UserLendedGamesCard = ({ imageUrl, gameName, rating, about, price, tags }) => {
+const UserLendedGamesCard = ({ imageUrl, gameName, rating, about, price, tags, category }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
   };
-
+console.log(category);
   return (
     // <div className="inline-block w-64 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mb-8">
     //   {/* Button to toggle the modal */}
@@ -127,7 +127,7 @@ const UserLendedGamesCard = ({ imageUrl, gameName, rating, about, price, tags })
     //   </div>
     // </div>
     <a
-      href="#"
+      href="#" 
       className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
     >
       <img
@@ -141,6 +141,9 @@ const UserLendedGamesCard = ({ imageUrl, gameName, rating, about, price, tags })
         </h5>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
           {about}
+          </p>
+        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+          {category}
           </p>
       </div>
     </a>

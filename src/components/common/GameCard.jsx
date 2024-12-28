@@ -125,7 +125,7 @@ const GameCard = ({ imageUrl, gameName, rating, about, price, tags }) => {
             {rating}
           </span>
         </div>
-        <p>
+        <p className=" text-gray-900 dark:text-white">
           {tags}
         </p>
 
