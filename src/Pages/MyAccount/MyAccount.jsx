@@ -8,6 +8,8 @@ import Rate from "../../components/common/Rating";
 const MyAccount = () => {
   const [showModal, setShowModal] = useState(false);
   const [notification, setNotification] = useState({ visible: false });
+  const name = localStorage.getItem("user_name");
+  const email = localStorage.getItem("email");
 
   const user = {
     profilePicture: "https://via.placeholder.com/150", // Default image
@@ -57,8 +59,11 @@ const MyAccount = () => {
             alt={`${user.name}'s profile picture`}
             className="w-32 h-32 rounded-full border-4 border-gray-200 object-cover"
           />
-          <h2 className="mt-4 text-3xl font-bold text-gray-800">{user.name}</h2>
-          <p className="text-gray-600 text-lg">{user.email}</p>
+          <h2 className="mt-4 text-3xl font-bold text-gray-800">{`${name
+              .charAt(0)
+              .toUpperCase()}${name.substring(1)}`}
+          </h2>
+          <p className="text-gray-600 text-lg">{email}</p>
           <Link
             to="/LendGameHistory"
             className="mt-4 text-sm font-medium text-blue-600 hover:text-blue-800"
