@@ -14,7 +14,7 @@ const LendGameModal = ({ onClose, onSubmit }) => {
     tags: "",
     about: "",
     termsAccepted: false,
-    image: "",
+    image: null, 
     category: "", 
   });
 
@@ -108,7 +108,7 @@ const LendGameModal = ({ onClose, onSubmit }) => {
         },
       });
 
-      console.log("Game lent successfully:", response.data);
+      // console.log("Game lent successfully:", response.data);
       onSubmit(response.data);
       onClose(); // Close the modal after successful submission
     } catch (error) {

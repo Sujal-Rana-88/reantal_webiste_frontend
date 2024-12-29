@@ -44,13 +44,6 @@ const LendGameHistory = () => {
   return (
 
     <>
-    <Navbar />
-    <Rate/>
-      <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      {/* Header Section */}
-      <h1 className="text-3xl font-bold text-center text-gray-900 mb-8">
-        Your Lended Games History
-      </h1>
 
       {/* Loading or Content */}
       {loading ? (
@@ -64,7 +57,7 @@ const LendGameHistory = () => {
               .split("$")
               .map((tag) => `#${tag}`)
               .join(" "); // Convert "ForzaHorizon$Racing" to "#ForzaHorizon #Racing"
-
+              
             return (
               <UserLendedGamesCard
                 key={game.lendingId}
@@ -75,6 +68,7 @@ const LendGameHistory = () => {
                 category = {game.category}
                 rating={5}
                 price={game.price}
+                createdAt={game.createdAt}
               />
             );
           })}
@@ -84,7 +78,6 @@ const LendGameHistory = () => {
           <p>No lended games found.</p>
         </div>
       )}
-    </div>
     </>
   );
 };

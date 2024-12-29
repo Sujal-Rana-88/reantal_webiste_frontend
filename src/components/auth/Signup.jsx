@@ -32,7 +32,7 @@ const Signup = () => {
     }
 
     try {
-      console.log(dob);
+      // console.log(dob);
       // if (image) {
       //   data.append('image', image);
       // }

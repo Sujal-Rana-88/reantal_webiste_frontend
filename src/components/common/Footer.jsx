@@ -8,7 +8,7 @@ import {
 
 const Footer = () => {
   const handleIconClick = (platform) => {
-    console.log(`Clicked on ${platform}`); // Replace with actual redirection if needed
+   // console.log(`Clicked on ${platform}`); // Replace with actual redirection if needed
     // Example:
     // if (platform === 'Facebook') {
     //   wind̥̥̥ow.open('https://www.facebook.com', '_blank');

@@ -81,17 +81,19 @@ const Navbar = () => {
     };
   }, []);
 
-  const confirmLogout = () => {
-    setShowLogoutModal(false);
-    localStorage.removeItem("isAuthenticated");
-    localStorage.removeItem("user_name");
-    localStorage.removeItem("email");
-    localStorage.removeItem("token");
+  // const confirmLogout = () => {
+  //   setShowLogoutModal(false);
+  //   localStorage.removeItem("isAuthenticated");
+  //   localStorage.removeItem("user_name");
+  //   localStorage.removeItem("email");
+  //   localStorage.removeItem("token");
   
-    // Replace the current route with the homepage
-    navigate("/", { replace: true });
+  //   // Replace the current route with the homepage
+  //   navigate("/", { replace: true });
+  // };
+  const handleClick = () => {
+    navigate("/profile");
   };
-  
 
   return (
     <>
@@ -172,7 +174,7 @@ const Navbar = () => {
 
           {/* User Dropdown */}
           <button
-            onClick={toggleDropdown}
+            onClick={handleClick}
             className="relative flex items-center text-sm bg-gray-800 rounded-full focus:outline-none"
           >
             <img
@@ -180,65 +182,7 @@ const Navbar = () => {
               alt="User"
               className="w-8 h-8 rounded-full"
             />
-            {dropdownOpen && (
-              <div
-                ref={dropdownRef}
-                className="absolute right-0 mt-64 w-48 bg-white shadow-lg rounded-lg z-50"
-              >
-                <div className="py-2">
-                  <span className="text-[16px] font-semibold text-blue-800/65">{`${name
-                    .charAt(0)
-                    .toUpperCase()}${name.substring(1)}`}</span>
-                  <div></div>
-                  <span className="text-xs text-slate-500/85 shadow-sm">
-                    {email}
-                  </span>
-                </div>
-                <hr />
-                <ul className="py-2">
-                  <li>
-                    <Link
-                      to="/myaccount"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Profile
-                    </Link>
-                  </li>
-                  {/* <li>
-                    <Link
-                      to="/profile"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Profile
-                    </Link>
-                  </li> */}
-                  <li>
-                    <a
-                      href="/settings"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Settings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Earnings
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      onClick={() => setShowLogoutModal(true)}
-                      className="block px-4 py-2 text-sm text-red-600 cursor-pointer"
-                    >
-                      Logout
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            )}
+            
           </button>
         </div>
       </nav>
@@ -286,30 +230,7 @@ const Navbar = () => {
   </div>
 )}
 
-      {/* Logout Modal */}
-      {showLogoutModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
-            <h2 className="text-lg font-bold text-center">
-              Are you sure you want to logout?
-            </h2>
-            <div className="flex justify-center space-x-4 mt-4">
-              <button
-                onClick={confirmLogout}
-                className="px-4 py-2 text-white bg-blue-600 rounded-md"
-              >
-                Yes, Logout
-              </button>
-              <button
-                onClick={() => setShowLogoutModal(false)}
-                className="px-4 py-2 text-white bg-gray-600 rounded-md"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      
     </>
   );
 };

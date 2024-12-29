@@ -40,14 +40,6 @@ function App() {
         }
       />
       <Route
-        path="/myaccount"
-        element={
-          <ProtectedRoute>
-            <MyAccount />
-          </ProtectedRoute>
-        }
-      />
-      <Route
         path="/LendGameHistory"
         element={
           <ProtectedRoute>
@@ -88,7 +80,7 @@ function App() {
         }
       />
       <Route
-        path="/settings"
+        path="/profile"
         element={
           <ProtectedRoute>
             <Profile />
