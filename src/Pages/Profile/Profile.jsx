@@ -127,9 +127,9 @@ function Profile() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-50 mt-10">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-800 mt-10">
         <div className="max-w-7xl mx-5 px-4 py-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">My Account</h1>
+          <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">My Account</h1>
 
           <div className="flex gap-8">
             {/* Navigation */}
@@ -143,8 +143,8 @@ function Profile() {
                       onClick={() => setActiveTab(item.id)}
                       className={`w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
                         activeTab === item.id
-                          ? "bg-blue-50 text-blue-700"
-                          : "text-gray-700 hover:bg-gray-100"
+                          ? "bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200"
+                          : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-500/50"
                       }`}
                     >
                       <Icon className="h-5 w-5 mr-3" />
@@ -155,11 +155,11 @@ function Profile() {
               </nav>
             </div>
             {/* Content */}
-            <div className="flex-1 bg-white rounded-lg shadow-sm p-8">
+            <div className="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
               {activeTab === "profile" && (
                 <div className="space-y-8">
                   <div className="flex justify-between items-center">
-                    <h2 className="text-xl font-semibold text-gray-900">
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                       Profile Information
                     </h2>
                     {!isEditing && (
@@ -189,49 +189,49 @@ function Profile() {
                         <div className="flex-1 space-y-6">
                           <div className="grid grid-cols-2 gap-6">
                             <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                                 First Name
                               </label>
                               <input
                                 type="text"
                                 defaultValue={userData.firstName}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                               />
                             </div>
                             <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                                 Last Name
                               </label>
                               <input
                                 type="text"
                                 defaultValue={userData.lastName}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                               />
                             </div>
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                               Email
                             </label>
                             <input
                               type="email"
                               defaultValue={userData.email}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             />
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                               Bio
                             </label>
                             <textarea
                               defaultValue={userData.bio}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                               rows={4}
                             />
                           </div>
                           <div className="grid grid-cols-2 gap-6">
                             <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                                 Location
                               </label>
                               <input
@@ -241,7 +241,7 @@ function Profile() {
                               />
                             </div>
                             <div>
-                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                                 Website
                               </label>
                               <input
@@ -256,7 +256,7 @@ function Profile() {
                       <div className="flex justify-end gap-4">
                         <button
                           onClick={handleCancel}
-                          className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+                          className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600"
                         >
                           Cancel
                         </button>
@@ -279,28 +279,28 @@ function Profile() {
                         />
                         <div className="flex-1 space-y-4">
                           <div>
-                            <h3 className="text-2xl font-medium text-gray-900">
+                            <h3 className="text-2xl font-medium text-gray-900 dark:text-white">
                               {name}
                             </h3>
                             <p className="text-gray-500">{email}</p>
                           </div>
                           <div className="pt-2">
-                            <h4 className="text-sm font-medium text-gray-700 mb-1">
+                            <h4 className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                               Bio
                             </h4>
-                            <p className="text-gray-600">{userData.bio}</p>
+                            <p className="text-gray-500 dark:text-gray-400">{userData.bio}</p>
                           </div>
                           <div className="grid grid-cols-2 gap-6 pt-2">
                             <div>
-                              <h4 className="text-sm font-medium text-gray-700 mb-1">
+                              <h4 className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                                 Location
                               </h4>
-                              <p className="text-gray-600">
+                              <p className="text-gray-500 dark:text-gray-400">
                                 {userData.location}
                               </p>
                             </div>
                             <div>
-                              <h4 className="text-sm font-medium text-gray-700 mb-1">
+                              <h4 className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                                 Website
                               </h4>
                               <a
@@ -327,7 +327,7 @@ function Profile() {
               )}
               {activeTab === "notifications" && (
                 <div className="space-y-6">
-                  <h2 className="text-xl font-semibold text-gray-900">
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                     Notification Preferences
                   </h2>
                   <div className="space-y-4">
@@ -341,10 +341,10 @@ function Profile() {
                         className="flex items-center justify-between py-3 border-b"
                       >
                         <div>
-                          <h3 className="text-sm font-medium text-gray-900">
+                          <h3 className="text-sm font-medium text-gray-900 dark:text-white">
                             {item}
                           </h3>
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm text-gray-500 dark:text-gray-400">
                             Receive notifications about updates
                           </p>
                         </div>
@@ -448,35 +448,35 @@ function Profile() {
               )}
               {activeTab === "privacy" && (
                 <div className="space-y-6">
-                  <h2 className="text-xl font-semibold text-gray-900">
-                    Privacy & Security
-                  </h2>
-                  <div className="space-y-4">
-                    <div className="p-4 bg-gray-50 rounded-lg">
-                      <h3 className="text-sm font-medium text-gray-900 mb-2">
-                        Two-Factor Authentication
-                      </h3>
-                      <p className="text-sm text-gray-500 mb-4">
-                        Add an extra layer of security to your account
-                      </p>
-                      <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
-                        Enable 2FA
-                      </button>
-                    </div>
-                    <div className="p-4 bg-gray-50 rounded-lg">
-                      <h3 className="text-sm font-medium text-gray-900 mb-2">
-                        Password
-                      </h3>
-                      <p className="text-sm text-gray-500 mb-4">
-                        Change your password regularly to keep your account
-                        secure
-                      </p>
-                      <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
-                        Change Password
-                      </button>
-                    </div>
+                <h2 className="text-lg font-bold text-center text-gray-900 dark:text-white">
+                  Privacy & Security
+                </h2>
+                <div className="space-y-4">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
+                      Two-Factor Authentication
+                    </h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                      Add an extra layer of security to your account
+                    </p>
+                    <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">
+                      Enable 2FA
+                    </button>
+                  </div>
+                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
+                      Password
+                    </h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                      Change your password regularly to keep your account secure
+                    </p>
+                    <button className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-100 bg-white border border-gray-300 dark:bg-gray-700 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600">
+                      Change Password
+                    </button>
                   </div>
                 </div>
+              </div>
+              
               )}
             </div>
           </div>
