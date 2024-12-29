@@ -128,12 +128,12 @@ function Profile() {
     <>
       <Navbar />
       <div className="min-h-screen bg-gray-50 dark:bg-gray-800 mt-10">
-        <div className="max-w-7xl mx-5 px-4 py-8">
+        <div className="max-w-7xl mx-5 px-4 sm:px-6 lg:px-4 py-8">
           <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">My Account</h1>
 
-          <div className="flex gap-8">
+          <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
             {/* Navigation */}
-            <div className="w-64 flex-shrink-0">
+            <div className="w-full lg:w-64 lg:flex-shrink-0">
               <nav className="space-y-1">
                 {navigationItems.map((item) => {
                   const Icon = item.icon;
@@ -155,7 +155,7 @@ function Profile() {
               </nav>
             </div>
             {/* Content */}
-            <div className="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
+            <div className="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 sm:p-6 lg:p-8">
               {activeTab === "profile" && (
                 <div className="space-y-8">
                   <div className="flex justify-between items-center">
@@ -175,12 +175,12 @@ function Profile() {
                   {isEditing ? (
                     // Edit Mode
                     <div className="space-y-8">
-                      <div className="flex items-start gap-8">
-                        <div className="relative group">
+                      <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-8">
+                        <div className="w-full sm:w-auto">
                           <img
                             src={avatarUrl}
                             alt="Profile"
-                            className="w-32 h-32 rounded-full object-cover"
+                            className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover mx-auto sm:mx-0"
                           />
                           <button className="absolute bottom-0 right-0 p-2 bg-white rounded-full shadow-lg border border-gray-200 group-hover:bg-gray-50">
                             <Camera className="w-5 h-5 text-gray-600" />
@@ -360,26 +360,27 @@ function Profile() {
               {/* {showLogoutModal && ( */}
               {activeTab === "logout" && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
-                  <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
-                    <h2 className="text-lg font-bold text-center">
-                      Are you sure you want to logout?
-                    </h2>
-                    <div className="flex justify-center space-x-4 mt-4">
-                      <button
-                        onClick={confirmLogout}
-                        className="px-4 py-2 text-white bg-blue-600 rounded-md"
-                      >
-                        Yes, Logout
-                      </button>
-                      <button
-                        onClick={() => setActiveTab("profile")}
-                        className="px-4 py-2 text-white bg-gray-600 rounded-md"
-                      >
-                        Cancel
-                      </button>
-                    </div>
+                <div className="bg-white p-6 rounded-lg shadow-lg w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
+                  <h2 className="text-lg font-bold text-center">
+                    Are you sure you want to logout?
+                  </h2>
+                  <div className="flex justify-center space-x-4 mt-4">
+                    <button
+                      onClick={confirmLogout}
+                      className="px-4 py-2 text-white bg-blue-600 rounded-md"
+                    >
+                      Yes, Logout
+                    </button>
+                    <button
+                      onClick={() => setActiveTab("profile")}
+                      className="px-4 py-2 text-white bg-gray-600 rounded-md"
+                    >
+                      Cancel
+                    </button>
                   </div>
                 </div>
+              </div>
+              
               )}
               {/* LEND GAME HISTORY */}
               {activeTab === "history" && (
