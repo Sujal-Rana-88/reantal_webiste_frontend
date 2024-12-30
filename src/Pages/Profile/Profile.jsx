@@ -29,6 +29,8 @@ function Profile() {
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
   );
   const name = localStorage.getItem("user_name");
+  const firstName = localStorage.getItem("firstName");
+  const lastName = localStorage.getItem("lastName");
   const email = localStorage.getItem("email");
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [games, setGames] = useState([]); // State to store games data
@@ -86,12 +88,9 @@ function Profile() {
   };
   // Mock user data - in a real app, this would come from your backend
   const userData = {
-    firstName: "John",
-    lastName: "Doe",
-    email: "john@example.com",
-    bio: "Software developer passionate about creating amazing user experiences.",
-    location: "San Francisco, CA",
-    website: "https://horizon-games.netlify.app/home",
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
   };
 
   const navigationItems = [
@@ -219,38 +218,6 @@ function Profile() {
                               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             />
                           </div>
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                              Bio
-                            </label>
-                            <textarea
-                              defaultValue={userData.bio}
-                              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                              rows={4}
-                            />
-                          </div>
-                          <div className="grid grid-cols-2 gap-6">
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                                Location
-                              </label>
-                              <input
-                                type="text"
-                                defaultValue={userData.location}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                              />
-                            </div>
-                            <div>
-                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                                Website
-                              </label>
-                              <input
-                                type="url"
-                                defaultValue={userData.website}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                              />
-                            </div>
-                          </div>
                         </div>
                       </div>
                       <div className="flex justify-end gap-4">
@@ -284,45 +251,11 @@ function Profile() {
                             </h3>
                             <p className="text-gray-500">{email}</p>
                           </div>
-                          <div className="pt-2">
-                            <h4 className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                              Bio
-                            </h4>
-                            <p className="text-gray-500 dark:text-gray-400">{userData.bio}</p>
-                          </div>
-                          <div className="grid grid-cols-2 gap-6 pt-2">
-                            <div>
-                              <h4 className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                                Location
-                              </h4>
-                              <p className="text-gray-500 dark:text-gray-400">
-                                {userData.location}
-                              </p>
-                            </div>
-                            <div>
-                              <h4 className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
-                                Website
-                              </h4>
-                              <a
-                                href={userData.website}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-blue-600 hover:underline"
-                              >
-                                {userData.website}
-                              </a>
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
                   )}
-                  <Link
-                    to="/LendGameHistory"
-                    className="mt-4 text-sm font-medium text-blue-600 hover:text-blue-800"
-                  >
-                    View Lend History
-                  </Link>
+                  
                 </div>
               )}
               {activeTab === "notifications" && (
