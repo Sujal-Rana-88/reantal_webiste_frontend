@@ -51,6 +51,12 @@ const Signup = () => {
       setMessage(response.data.message);
 
       setLoad(true);
+
+      localStorage.setItem("user_name", response.data.userName);
+      localStorage.setItem("email", response.data.email);
+      localStorage.setItem("firstName", response.data.firstName);
+      localStorage.setItem("lastName", response.data.lastName);
+
       // navigate('/login');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed. Try again.');
@@ -83,7 +89,7 @@ const Signup = () => {
           <button onClick={() => navigate('/login')} className="text-primary-600 hover:underline">Log in</button>
         </p>
         <p className='font-semibold text-md text-red-400'>
-          {load && "Please check your email for verification"}
+          {load && "Please check your mail for verification"}
         </p>
       </div>
     </section>
