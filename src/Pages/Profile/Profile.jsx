@@ -7,12 +7,8 @@ import LoadingSpinner from "../../components/common/LoadingSpinner";
 import Notification from "../../components/common/Notification";
 import LendGameModal from "../../components/common/LendGameModal";
 import Navbar from "../../components/common/Navbar";
-<<<<<<< HEAD
-import { ToastContainer, toast } from "react-toastify";
-=======
 import { ToastContainer, toast } from 'react-toastify';
 
->>>>>>> 16d252c6734901a1a776cfe4c24e041cb55ea746
 import {
   Settings,
   User,
@@ -42,9 +38,7 @@ function Profile() {
   const [loading, setLoading] = useState(true); // Loading state for API call
   const [showModal, setShowModal] = useState(false);
   const [notification, setNotification] = useState({ visible: false });
-<<<<<<< HEAD
   const [delButton, setDelButton] = useState(false);
-=======
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("user_id");
 
@@ -53,7 +47,6 @@ const [formData, setFormData] = useState({
     lastName: lastName,
     image: "null", 
   });
->>>>>>> 16d252c6734901a1a776cfe4c24e041cb55ea746
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -155,7 +148,6 @@ const [formData, setFormData] = useState({
     navigate("/", { replace: true });
   };
 
-<<<<<<< HEAD
   const confirmDelete = async () => {
     // Here you would typically delete the user data
     // setDelButton(false);
@@ -188,7 +180,6 @@ const [formData, setFormData] = useState({
     }
   };
 
-=======
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
 
@@ -240,12 +231,10 @@ const [formData, setFormData] = useState({
       setIsEditing(false);
     }
   };
->>>>>>> 16d252c6734901a1a776cfe4c24e041cb55ea746
   return (
     <>
       <ToastContainer />
       <Navbar />
-      <ToastContainer />
       <div className="min-h-screen bg-gray-50 dark:bg-gray-800 mt-10">
         <div className="max-w-7xl mx-5 px-4 sm:px-6 lg:px-4 py-8">
           <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
@@ -539,7 +528,6 @@ const [formData, setFormData] = useState({
                       <button className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-100 bg-white border border-gray-300 dark:bg-gray-700 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600">
                         Change Password
                       </button>
-<<<<<<< HEAD
                       <p className="text-sm text-gray-500 dark:text-gray-400 mt-10 mb-4">
                         Change your password regularly to keep your account
                         secure
@@ -595,8 +583,6 @@ const [formData, setFormData] = useState({
                           </div>
                         </div>
                       )}
-=======
->>>>>>> 16d252c6734901a1a776cfe4c24e041cb55ea746
                     </div>
                   </div>
                 </div>

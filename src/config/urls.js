@@ -13,11 +13,8 @@ const API_URLS = {
   UPDATE_GAME: `${BASE_URL}/games/update`,
   UPLOADS: `${BASE_URL}/uploads`,
   VERIFY_EMAIL: `${BASE_URL}/verifyEmail`,
-<<<<<<< HEAD
-  DELETE_ACCOUNT: `${BASE_URL}/deleteAccount`
-=======
+  DELETE_ACCOUNT: `${BASE_URL}/deleteAccount`,
   UPDATE_INFO: `${BASE_URL}/user/settings`
->>>>>>> 16d252c6734901a1a776cfe4c24e041cb55ea746
 };
 
 export default API_URLS;
