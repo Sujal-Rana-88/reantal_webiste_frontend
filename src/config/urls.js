@@ -11,7 +11,8 @@ const API_URLS = {
   LOGIN: `${BASE_URL}/login`,
   REGISTER: `${BASE_URL}/register`,
   UPDATE_GAME: `${BASE_URL}/games/update`,
-  UPLOADS: `${BASE_URL}/uploads` 
+  UPLOADS: `${BASE_URL}/uploads`,
+  VERIFY_EMAIL: `${BASE_URL}/verifyEmail`
 };
 
 export default API_URLS;

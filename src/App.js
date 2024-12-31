@@ -14,6 +14,7 @@ import Services from "./Pages/Services/Services";
 import RentGame from "./Pages/RentGame/RentGame";
 import LendGameHistory from "./Pages/LendGamesHistory/LendGameHistory";
 import Profile from "./Pages/Profile/Profile"
+import VerifyEmail from "./components/auth/VerifyEmail";
 
 const isAuthenticated = () => {
   // Check if the user is authenticated
@@ -29,6 +30,8 @@ function App() {
       />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/verifyEmail" element={<VerifyEmail />} />
+
 
       {/* Protect the Home route */}
       <Route

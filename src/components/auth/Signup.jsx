@@ -15,6 +15,7 @@ const Signup = () => {
   const [image, setImage] = useState(null);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
+  const [load, setLoad] = useState(false);
 
   const navigate = useNavigate();
   const isAuthenticated = localStorage.getItem('isAuthenticated');
@@ -48,7 +49,9 @@ const Signup = () => {
       });
         
       setMessage(response.data.message);
-      navigate('/login');
+
+      setLoad(true);
+      // navigate('/login');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed. Try again.');
     }
@@ -73,11 +76,14 @@ const Signup = () => {
             <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profile Picture</label>
             <input type="file" id="image" onChange={(e) => setImage(e.target.files[0])} className="block w-full text-sm" />
           </div>
-          <button type="submit" className="col-span-1 md:col-span-2 bg-primary-600 text-white py-2 rounded-lg">Sign Up</button>
+          <button type="submit" className="col-span-1 md:col-span-2 bg-blue-500 text-white py-2 rounded-lg">Sign Up</button>
         </form>
         <p className="text-sm text-gray-500">
           Already have an account?{' '}
           <button onClick={() => navigate('/login')} className="text-primary-600 hover:underline">Log in</button>
+        </p>
+        <p className='font-semibold text-md text-red-400'>
+          {load && "Please check your email for verification"}
         </p>
       </div>
     </section>
