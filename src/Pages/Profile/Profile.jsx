@@ -7,7 +7,12 @@ import LoadingSpinner from "../../components/common/LoadingSpinner";
 import Notification from "../../components/common/Notification";
 import LendGameModal from "../../components/common/LendGameModal";
 import Navbar from "../../components/common/Navbar";
+<<<<<<< HEAD
 import { ToastContainer, toast } from "react-toastify";
+=======
+import { ToastContainer, toast } from 'react-toastify';
+
+>>>>>>> 16d252c6734901a1a776cfe4c24e041cb55ea746
 import {
   Settings,
   User,
@@ -37,7 +42,18 @@ function Profile() {
   const [loading, setLoading] = useState(true); // Loading state for API call
   const [showModal, setShowModal] = useState(false);
   const [notification, setNotification] = useState({ visible: false });
+<<<<<<< HEAD
   const [delButton, setDelButton] = useState(false);
+=======
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("user_id");
+
+const [formData, setFormData] = useState({
+    firstName: firstName,
+    lastName: lastName,
+    image: "null", 
+  });
+>>>>>>> 16d252c6734901a1a776cfe4c24e041cb55ea746
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -83,6 +99,21 @@ function Profile() {
     handleHideModal();
   };
 
+  const handleSaveChangesNotification = () => {
+    setNotification({
+      visible: true,
+      message: "Game lent successfully!",
+      type: "success",
+    });
+
+    setTimeout(() => {
+      setNotification((prev) => ({ ...prev, visible: false }));
+    }, 3000);
+
+    handleHideModal();
+  };
+
+
   const handleHideModal = () => setShowModal(false);
   const closeNotification = () => {
     setNotification((prev) => ({ ...prev, visible: false }));
@@ -105,10 +136,10 @@ function Profile() {
     { id: "logout", label: "Logout", icon: LogOut },
   ];
 
-  const handleSave = () => {
-    // Here you would typically save the form data
-    setIsEditing(false);
-  };
+  // const handleSave = () => {
+  //   // Here you would typically save the form data
+  //   setIsEditing(false);
+  // };
 
   const handleCancel = () => {
     setIsEditing(false);
@@ -124,6 +155,7 @@ function Profile() {
     navigate("/", { replace: true });
   };
 
+<<<<<<< HEAD
   const confirmDelete = async () => {
     // Here you would typically delete the user data
     // setDelButton(false);
@@ -156,10 +188,64 @@ function Profile() {
     }
   };
 
+=======
+  const handleChange = (e) => {
+    const { name, value, type, files } = e.target;
+
+    // Regular expression to allow letters, numbers, spaces, and basic punctuation
+    const validCharactersRegex = /^[a-zA-Z0-9\s]*$/;
+
+    if (type === "file") {
+      setFormData({ ...formData, image: files[0] });
+    } else {
+      // Validate input value
+      if (validCharactersRegex.test(value) || value === "") {
+        setFormData({ ...formData, [name]: value });
+      }
+    }
+  };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+
+    // const formDataToSubmit = new FormData();
+    // formDataToSubmit.append("userId", userId);
+    // formDataToSubmit.append("firstName", formData.firstName);
+    // formDataToSubmit.append("lastName", formData.lastName);
+    // // formDataToSubmit.append("image", formData.image);
+    const formDataToSubmit = {
+      userId,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+    };
+
+    // setLoading(true); 
+    try {
+      const response = await axios.post(API_URLS.UPDATE_INFO, formDataToSubmit, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      });
+
+      // onSubmit(response.data);
+      handleSaveChangesNotification(response.data);
+    } catch (error) {
+      console.error(
+        "Error Saving user Info:",
+        error.response?.data || error.message
+      );
+      // alert("Failed to lend the game. Please try again.");
+      toast.error("Error Updating details " )
+    } finally {
+      setIsEditing(false);
+    }
+  };
+>>>>>>> 16d252c6734901a1a776cfe4c24e041cb55ea746
   return (
     <>
       <ToastContainer />
       <Navbar />
+      <ToastContainer />
       <div className="min-h-screen bg-gray-50 dark:bg-gray-800 mt-10">
         <div className="max-w-7xl mx-5 px-4 sm:px-6 lg:px-4 py-8">
           <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
@@ -210,26 +296,32 @@ function Profile() {
                   {isEditing ? (
                     // Edit Mode
                     <div className="space-y-8">
-                      <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-8">
-                        <div className="w-full sm:w-auto">
+                      <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-8">
+                        <div className="relative w-24 h-24 sm:w-32 sm:h-32">
                           <img
                             src={avatarUrl}
                             alt="Profile"
-                            className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover mx-auto sm:mx-0"
+                            className="w-full h-full rounded-full object-cover"
                           />
-                          <button className="absolute bottom-0 right-0 p-2 bg-white rounded-full shadow-lg border border-gray-200 group-hover:bg-gray-50">
+                          <button
+                            // onClick={handleUpload}
+                            className="absolute bottom-1 right-0 p-2 bg-white rounded-full shadow-lg border border-gray-200 hover:bg-gray-50"
+                          >
                             <Camera className="w-5 h-5 text-gray-600" />
                           </button>
                         </div>
-                        <div className="flex-1 space-y-6">
-                          <div className="grid grid-cols-2 gap-6">
+                        <div className="flex-1 w-full space-y-6">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div>
                               <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
                                 First Name
                               </label>
                               <input
                                 type="text"
-                                defaultValue={userData.firstName}
+                                name ="firstName"
+                                // defaultValue={formData.firstName}
+                                value={formData.firstName}
+                                onChange={handleChange}
                                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                               />
                             </div>
@@ -239,7 +331,10 @@ function Profile() {
                               </label>
                               <input
                                 type="text"
-                                defaultValue={userData.lastName}
+                                name="lastName"
+                                value={formData.lastName}
+
+                                onChange={handleChange}
                                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                               />
                             </div>
@@ -251,11 +346,13 @@ function Profile() {
                             <input
                               type="email"
                               defaultValue={userData.email}
-                              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                              readOnly
+                              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 cursor-not-allowed"
                             />
                           </div>
                         </div>
                       </div>
+
                       <div className="flex justify-end gap-4">
                         <button
                           onClick={handleCancel}
@@ -411,7 +508,7 @@ function Profile() {
                 <LendGameModal
                   onSubmit={handleLendGame}
                   setNotification={setNotification}
-                  onClose={handleHideModal}
+                  onClose={() => setActiveTab("profile")}
                 />
               )}
               {activeTab === "privacy" && (
@@ -442,6 +539,7 @@ function Profile() {
                       <button className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-100 bg-white border border-gray-300 dark:bg-gray-700 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600">
                         Change Password
                       </button>
+<<<<<<< HEAD
                       <p className="text-sm text-gray-500 dark:text-gray-400 mt-10 mb-4">
                         Change your password regularly to keep your account
                         secure
@@ -497,6 +595,8 @@ function Profile() {
                           </div>
                         </div>
                       )}
+=======
+>>>>>>> 16d252c6734901a1a776cfe4c24e041cb55ea746
                     </div>
                   </div>
                 </div>
