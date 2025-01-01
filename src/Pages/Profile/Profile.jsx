@@ -151,11 +151,10 @@ const [formData, setFormData] = useState({
   const confirmDelete = async () => {
     // Here you would typically delete the user data
     // setDelButton(false);
-    const userName = localStorage.getItem("user_name");
-    console.log(userName);
+    console.log(userId);
     try {
       const response = await axios.delete(
-        `${API_URLS.DELETE_ACCOUNT}?username=${userName}`
+        `${API_URLS.DELETE_ACCOUNT}?userId=${userId}`
       );
 
       setDelButton(false);
