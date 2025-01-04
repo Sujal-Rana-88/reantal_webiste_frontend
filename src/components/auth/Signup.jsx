@@ -26,38 +26,45 @@ const Signup = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-
+  
     if (password !== repeatPassword) {
       setError('Passwords do not match.');
       return;
     }
-
+  
     try {
-      // console.log(dob);
-      // if (image) {
-      //   data.append('image', image);
-      // }
-
-      const response = await axios.post(API_URLS.REGISTER, {
-        userName,
-        email,
-        password,
-        firstName, 
-        lastName,
-        phoneNumber,
-        dob
+      const formData = new FormData();
+      formData.append('userName', userName);
+      formData.append('email', email);
+      formData.append('password', password);
+      formData.append('firstName', firstName);
+      formData.append('lastName', lastName);
+      formData.append('phoneNumber', phoneNumber);
+      formData.append('dob', dob);
+  
+      if (image) {
+        formData.append('image', image);
+      }
+  
+      const response = await axios.post(API_URLS.REGISTER, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
-        
+  
       setMessage(response.data.message);
-
+  
       setLoad(true);
-
-      localStorage.setItem("user_name", response.data.userName);
-      localStorage.setItem("email", response.data.email);
-      localStorage.setItem("firstName", response.data.firstName);
-      localStorage.setItem("lastName", response.data.lastName);
-
-      // navigate('/login');
+  
+      localStorage.setItem('user_name', response.data.userName);
+      localStorage.setItem('email', response.data.email);
+      localStorage.setItem('firstName', response.data.firstName);
+      localStorage.setItem('lastName', response.data.lastName);
+      localStorage.setItem('profilePicture', response.data.profilePictureUrl);
+  
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed. Try again.');
     }

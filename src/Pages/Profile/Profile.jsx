@@ -41,6 +41,7 @@ function Profile() {
   const [delButton, setDelButton] = useState(false);
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("user_id");
+  const profileUrl = localStorage.getItem('profilePicture');
 
 const [formData, setFormData] = useState({
     firstName: firstName,
@@ -151,11 +152,10 @@ const [formData, setFormData] = useState({
   const confirmDelete = async () => {
     // Here you would typically delete the user data
     // setDelButton(false);
-    const userName = localStorage.getItem("user_name");
-    console.log(userName);
+    console.log(userId);
     try {
       const response = await axios.delete(
-        `${API_URLS.DELETE_ACCOUNT}?username=${userName}`
+        `${API_URLS.DELETE_ACCOUNT}?userId=${userId}`
       );
 
       setDelButton(false);
@@ -288,7 +288,7 @@ const [formData, setFormData] = useState({
                       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-8">
                         <div className="relative w-24 h-24 sm:w-32 sm:h-32">
                           <img
-                            src={avatarUrl}
+                            src={profileUrl || avatarUrl}
                             alt="Profile"
                             className="w-full h-full rounded-full object-cover"
                           />
@@ -362,7 +362,7 @@ const [formData, setFormData] = useState({
                     <div className="space-y-8">
                       <div className="flex items-start gap-8">
                         <img
-                          src={avatarUrl}
+                          src={profileUrl || avatarUrl}
                           alt="Profile"
                           className="w-32 h-32 rounded-full object-cover"
                         />

@@ -17,7 +17,10 @@ const Navbar = () => {
 
   const path = useLocation();
 
+  const profileUrl = localStorage.getItem('profilePicture');
+
   useEffect(() => {
+    
     // Update active link styles based on path
     setHome(path.pathname === "/home");
     setAbout(path.pathname === "/about");
@@ -128,7 +131,7 @@ const Navbar = () => {
           className="relative flex items-center text-sm bg-gray-800 rounded-full focus:outline-none"
         >
           <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+            src={profileUrl ? profileUrl : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"}
             alt="User"
             className="w-8 h-8 rounded-full"
           />

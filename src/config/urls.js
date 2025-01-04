@@ -14,7 +14,8 @@ const API_URLS = {
   UPLOADS: `${BASE_URL}/uploads`,
   VERIFY_EMAIL: `${BASE_URL}/verifyEmail`,
   DELETE_ACCOUNT: `${BASE_URL}/deleteAccount`,
-  UPDATE_INFO: `${BASE_URL}/user/settings`
+  UPDATE_INFO: `${BASE_URL}/user/settings`,
+  FETCH_USER_INFO: `${BASE_URL}/getUser`,
 };
 
 export default API_URLS;
