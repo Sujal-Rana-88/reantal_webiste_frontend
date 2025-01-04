@@ -115,7 +115,7 @@ console.log(category);
             {rating}
           </span>
         </div>
-        <p>
+        <p className="text-gray-600 dark:text-gray-400">
           {tags}
         </p>
 

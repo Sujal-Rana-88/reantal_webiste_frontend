@@ -6,7 +6,6 @@ import NotFound from "./components/NotFound";
 import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Home from "./Pages/HomePage/Home";
-import MyAccount from "./Pages/MyAccount/MyAccount";
 import AboutUs from "./Pages/AboutUs/AboutUs";
 import ContactUs from "./Pages/ContactUs/ContactUs";
 import UnauthorizedHome from "./Pages/Unauthorized/UnauthorizedHome";
@@ -15,9 +14,9 @@ import RentGame from "./Pages/RentGame/RentGame";
 import LendGameHistory from "./Pages/LendGamesHistory/LendGameHistory";
 import Profile from "./Pages/Profile/Profile"
 import VerifyEmail from "./components/auth/VerifyEmail";
+import MoreGames from "./Pages/MoreGames/MoreGames";
 
 const isAuthenticated = () => {
-  // Check if the user is authenticated
   return JSON.parse(localStorage.getItem('isAuthenticated')) === true; 
 };
 
@@ -90,7 +89,14 @@ function App() {
           </ProtectedRoute>
         }
       />
-
+      <Route
+        path="/more"
+        element={
+          <ProtectedRoute>
+            <MoreGames />
+          </ProtectedRoute>
+        }
+      />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
