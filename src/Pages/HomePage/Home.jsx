@@ -5,6 +5,8 @@ import Featured from "../../components/common/Featured";
 import Footer from "../../components/common/Footer";
 import GameCard from "../../components/common/GameCard";
 import API_URLS from "../../config/urls";
+import { FaClock } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [games, setGames] = useState([]); // State to store games data
@@ -40,7 +42,20 @@ function Home() {
       <div className="bg-white dark:bg-gray-900 text-black dark:text-white">
         <Navbar />
         <Featured />
+        <div></div>
         <div className="overflow-x-auto whitespace-nowrap p-4 bg-gray-100 dark:bg-gray-800">
+          <div className="flex justify-between items-center mb-4">
+            <div className="flex items-center">
+              <span>Latest Games</span>
+              <FaClock style={{ marginLeft: "8px" }} />
+            </div>
+            <Link
+              to="/more"
+              className="text-sm bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center justify-center"
+            >
+              Show More
+            </Link>
+          </div>
           <div className="flex space-x-4">
             {loading ? (
               <p className="text-gray-600 dark:text-gray-400">Loading...</p>

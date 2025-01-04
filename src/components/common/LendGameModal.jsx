@@ -274,7 +274,6 @@ const LendGameModal = ({ onClose, onSubmit }) => {
                   required
                 >
                   <option value="">Select a category</option>
-                  <option value="Famous">Famous</option>
                   <option value="Action">Action</option>
                   <option value="RPG">RPG</option>
                   <option value="Sports">Sports</option>

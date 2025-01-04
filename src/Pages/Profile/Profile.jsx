@@ -96,7 +96,7 @@ const [formData, setFormData] = useState({
   const handleSaveChangesNotification = () => {
     setNotification({
       visible: true,
-      message: "Game lent successfully!",
+      message: "User Info changed successfully!",
       type: "success",
     });
 
@@ -463,7 +463,7 @@ const [formData, setFormData] = useState({
 
                           return (
                             <div key={game.lendingId} className="space-y-2">
-                              <h3 className="text-lg font-semibold">
+                              <h3 className="text-gray-600 dark:text-gray-400 text-lg font-semibold">
                                 Lended At {formattedDate}
                               </h3>
                               <UserLendedGamesCard
