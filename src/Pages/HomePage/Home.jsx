@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 function Home() {
   const [games, setGames] = useState([]); // State to store games data
   const [loading, setLoading] = useState(true); // Loading state for API call
+  const [visibleGames, setVisibleGames] = useState(10); // Number of games to display initially
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -37,15 +38,21 @@ function Home() {
     fetchGames();
   }, []);
 
+  const handleShowMore = () => {
+    // Increase the number of visible games by 10
+    setVisibleGames((prev) => Math.min(prev + 10, games.length));
+  };
+
   return (
     <>
       <div className="bg-white dark:bg-gray-900 text-black dark:text-white">
         <Navbar />
+        
         <Featured />
-        <div></div>
-        <div className="overflow-x-auto whitespace-nowrap p-4 bg-gray-100 dark:bg-gray-800">
-          <div className="flex justify-between items-center mb-4">
-            <div className="flex items-center">
+        <div className="p-4">
+          {/* Header Section */}
+          <div className="flex justify-between items-center mb-4 sticky top-0 bg-gray-100 dark:bg-gray-800 p-4 z-10">
+            <div className="flex items-center text-lg font-medium">
               <span>Latest Games</span>
               <FaClock style={{ marginLeft: "8px" }} />
             </div>
@@ -56,33 +63,38 @@ function Home() {
               Show More
             </Link>
           </div>
-          <div className="flex space-x-4">
-            {loading ? (
-              <p className="text-gray-600 dark:text-gray-400">Loading...</p>
-            ) : games.length > 0 ? (
-              games.map((game) => {
-                const formattedTags = game.tags
-                  .split("$")
-                  .map((tag) => `#${tag}`)
-                  .join(" "); // Convert "ForzaHorizon$Racing" to "#ForzaHorizon #Racing"
 
-                return (
-                  <GameCard
-                    key={game.lendingId}
-                    imageUrl={game.image}
-                    about={game.about}
-                    tags={formattedTags} // Pass the formatted tags
-                    gameName={game.gameName}
-                    rating={5}
-                    price={game.price}
-                  />
-                );
-              })
-            ) : (
-              <p className="text-gray-600 dark:text-gray-400">
-                No games available.
-              </p>
-            )}
+          {/* Horizontal Scrolling Games Section */}
+          <div className="overflow-x-auto whitespace-nowrap bg-gray-100 dark:bg-gray-800 p-4 rounded-md">
+            <div className="flex space-x-4">
+              {loading ? (
+                <p className="text-gray-600 dark:text-gray-400">Loading...</p>
+              ) : games.length > 0 ? (
+                games.slice(0, visibleGames).map((game) => {
+                  const formattedTags = game.tags
+                    .split("$")
+                    .map((tag) => `#${tag}`)
+                    .join(" "); // Convert "ForzaHorizon$Racing" to "#ForzaHorizon #Racing"
+
+                  return (
+                    <GameCard
+                      key={game.lendingId}
+                      imageUrl={game.image}
+                      about={game.about}
+                      tags={formattedTags} // Pass the formatted tags
+                      gameName={game.gameName}
+                      rating={5}
+                      price={game.price}
+                      category={game.category}
+                    />
+                  );
+                })
+              ) : (
+                <p className="text-gray-600 dark:text-gray-400">
+                  No games available.
+                </p>
+              )}
+            </div>
           </div>
         </div>
         <Footer />

@@ -63,7 +63,7 @@ const Signup = () => {
       localStorage.setItem('profilePicture', response.data.profilePictureUrl);
   
       setTimeout(() => {
-        navigate('/login');
+        navigate('/verifyEmail');
       }, 2000);
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed. Try again.');

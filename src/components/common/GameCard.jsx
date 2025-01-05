@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const GameCard = ({ imageUrl, gameName, rating, about, price, tags }) => {
+const GameCard = ({ imageUrl, gameName, rating, about, price, tags, category }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalToggle = () => {
@@ -78,6 +78,11 @@ const GameCard = ({ imageUrl, gameName, rating, about, price, tags }) => {
               <div className="p-4 space-y-4">
                 <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                   {about}
+                </p>
+              </div>
+              <div className="p-4 space-y-4">
+                <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                  Category : {category}
                 </p>
               </div>
             </div>
