@@ -81,10 +81,9 @@ const ContactUs = () => {
 
             {/* Contact Information */}
             <div className="mt-8 text-center">
-              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Get in Touch With Me</h3>
-              <p className="mt-2 text-gray-600 dark:text-gray-400">Email: rsrohan787@gmail.com</p>
-              <p className="text-gray-600 dark:text-gray-400">Phone: +91 90419 11113</p>
-              <p className="text-gray-600 dark:text-gray-400">Address: 12 hno gali shruti de pichli side rohin de bed de nal</p>
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Get in Touch With Us</h3>
+              <p className="mt-2 text-gray-600 dark:text-gray-400">Email: HorizonGames@gmail.com</p>
+              <p className="text-gray-600 dark:text-gray-400">Address: Jalandhar, Punjab</p>
             </div>
           </div>
         </div>

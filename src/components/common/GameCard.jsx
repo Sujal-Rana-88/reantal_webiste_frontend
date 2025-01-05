@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const GameCard = ({ imageUrl, gameName, rating, about, price, tags, category }) => {
+const GameCard = ({
+  imageUrl,
+  gameName,
+  rating,
+  about,
+  price,
+  tags,
+  category,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalToggle = () => {
@@ -28,7 +36,7 @@ const GameCard = ({ imageUrl, gameName, rating, about, price, tags, category }) 
         </svg> */}
         <svg
           onClick={handleModalToggle}
-          className="w-6 h-6 cursor-pointer bg-white"
+          className={`w-6 h-6 cursor-pointer dark:bg-white `}
           xmlns="http://www.w3.org/2000/svg"
           x="0px"
           y="0px"
@@ -130,16 +138,14 @@ const GameCard = ({ imageUrl, gameName, rating, about, price, tags, category }) 
             {rating}
           </span>
         </div>
-        <p className=" text-gray-900 dark:text-white">
-          {tags}
-        </p>
+        <p className=" text-gray-900 dark:text-white">{tags}</p>
 
         {/* Price and rent button */}
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold text-gray-900 dark:text-white">
             ₹{price}
           </span>
-          
+
           <Link
             to={{
               pathname: "/rentgame",

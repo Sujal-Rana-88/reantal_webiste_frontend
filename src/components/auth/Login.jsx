@@ -23,7 +23,6 @@ function Login() {
     try {
       // const response = await axios.post('http://192.168.43.140:5000/login', {
       const response = await axios.post(API_URLS.LOGIN, {
-        // const response = await axios.post('https://rental-website-backend.onrender.com/login', {
         userName,
         password
       });
@@ -36,6 +35,8 @@ function Login() {
       localStorage.setItem("lastName", response.data.lastName);
       localStorage.setItem("email", response.data.email);
       localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("profilePicture", response.data.profilePictureUrl);
+      console.log(response.data.profilePictureUrl);
 
       setMessage(response.data.message || "Login successful!");
 
