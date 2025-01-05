@@ -12,9 +12,9 @@ import UnauthorizedHome from "./Pages/Unauthorized/UnauthorizedHome";
 import Services from "./Pages/Services/Services";
 import RentGame from "./Pages/RentGame/RentGame";
 import LendGameHistory from "./Pages/LendGamesHistory/LendGameHistory";
-import Profile from "./Pages/Profile/Profile"
 import VerifyEmail from "./components/auth/VerifyEmail";
 import MoreGames from "./Pages/MoreGames/MoreGames";
+import MyAccount from "./Pages/Profile/MyAccount";
 
 const isAuthenticated = () => {
   return JSON.parse(localStorage.getItem('isAuthenticated')) === true; 
@@ -82,10 +82,10 @@ function App() {
         }
       />
       <Route
-        path="/profile"
+        path="/myaccount"
         element={
           <ProtectedRoute>
-            <Profile />
+            <MyAccount />
           </ProtectedRoute>
         }
       />

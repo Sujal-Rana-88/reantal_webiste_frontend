@@ -124,11 +124,11 @@ const LendGameModal = ({ onClose, onSubmit }) => {
 
   return (
     <>
-      <div
-        id="crud-modal"
-        className="overflow-y-auto overflow-x-hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 justify-center items-center w-full h-[calc(100%-1rem)] max-h-full"
-      >
-        <div className="relative p-4 w-full max-w-lg max-h-full">
+      {/* <div
+  id="crud-modal"
+  className="fixed inset-0 z-50 flex justify-center items-center"
+> */}
+        {/* <div className="relative p-4 w-full max-w-lg max-h-full"> */}
           {/* Modal content */}
           <div className="relative bg-white rounded-lg shadow">
             {/* Modal header */}
@@ -343,8 +343,8 @@ const LendGameModal = ({ onClose, onSubmit }) => {
               </div>
             </form>
           </div>
-        </div>
-      </div>
+        {/* </div> */}
+      {/* </div> */}
     </>
   );
 };

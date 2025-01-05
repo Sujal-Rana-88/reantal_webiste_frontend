@@ -51,7 +51,7 @@ const Navbar = () => {
   }, [path]);
 
   const handleClick = () => {
-    navigate("/profile");
+    navigate("/myaccount");
   };
 
   return (
