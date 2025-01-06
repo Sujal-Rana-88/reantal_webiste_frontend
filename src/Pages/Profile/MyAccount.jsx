@@ -21,17 +21,9 @@ import UserProfile from "./UserProfile";
 
 function MyAccount() {
   const [activeTab, setActiveTab] = useState("profile");
-
-  
   const [notification, setNotification] = useState({ visible: false });
   const [showModal, setShowModal] = useState(false);
-  const fileInputRef = useRef(null);
-
-  const handleButtonClick = () => {
-    // Trigger the hidden file input click
-    fileInputRef.current.click();
-  };
-
+ 
   const handleHideModal = () => setShowModal(false);
   const handleLendGame = () => {
     setNotification({
@@ -61,8 +53,6 @@ function MyAccount() {
     { id: "lendGame", label: "Lend Your Game", icon: Gamepad2 },
     { id: "notifications", label: "Notifications", icon: Bell },
     { id: "privacy", label: "Privacy & Security", icon: Shield },
-    { id: "appearance", label: "Appearance", icon: Palette },
-    { id: "help", label: "Help & Support", icon: HelpCircle },
     { id: "logout", label: "Logout", icon: LogOut },
   ];
 
@@ -175,7 +165,7 @@ function MyAccount() {
               )}
               {activeTab === "privacy" && (
                
-                <Privacy onClickHandle={() => setActiveTab("profile")}/>
+                <Privacy onClickHandle={() => setActiveTab("privacy")}/>
               )}
             </div>
           </div>

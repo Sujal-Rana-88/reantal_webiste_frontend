@@ -15,6 +15,7 @@ const API_URLS = {
   VERIFY_EMAIL: `${BASE_URL}/verifyEmail`,
   DELETE_ACCOUNT: `${BASE_URL}/deleteAccount`,
   UPDATE_INFO: `${BASE_URL}/user/settings`,
+  UPDATE_PASSWORD: `${BASE_URL}/changepassword`,
   FETCH_USER_INFO: `${BASE_URL}/getUser`,
 };
 

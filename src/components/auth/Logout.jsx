@@ -13,19 +13,20 @@ const [theme, setTheme] = useState(() => {
 });
 
 const confirmLogout = () => {
-  setTheme(theme === "dark");
+  setTimeout(() => {
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_name");
+    localStorage.removeItem("email");
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("firstName");
+    localStorage.removeItem("lastName");
+    localStorage.removeItem("profilePicture");
+  }, 200); // Small delay to reduce blocking
   setShowLogoutModal(false);
-  localStorage.removeItem("user_id");
-  localStorage.removeItem("token");
-  localStorage.removeItem("user_name");
-  localStorage.removeItem("email");
-  localStorage.removeItem("isAuthenticated");
-  localStorage.removeItem("firstName");
-  localStorage.removeItem("lastName");
-  localStorage.removeItem("profilePicture");
-  // Replace the current route with the homepage
-  navigate("/", { replace: true });
+  navigate("/");
 };
+
   return (
     <>
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">

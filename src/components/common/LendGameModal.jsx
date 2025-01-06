@@ -14,8 +14,8 @@ const LendGameModal = ({ onClose, onSubmit }) => {
     tags: "",
     about: "",
     termsAccepted: false,
-    image: null, 
-    category: "", 
+    image: null,
+    category: "",
   });
 
   const [tagsList, setTagsList] = useState([]);
@@ -97,7 +97,6 @@ const LendGameModal = ({ onClose, onSubmit }) => {
     formDataToSubmit.append("userId", userId);
     formDataToSubmit.append("image", formData.image);
     formDataToSubmit.append("category", formData.category);
-    
 
     setLoading(true); // Show loader
     try {
@@ -128,222 +127,203 @@ const LendGameModal = ({ onClose, onSubmit }) => {
   id="crud-modal"
   className="fixed inset-0 z-50 flex justify-center items-center"
 > */}
-        {/* <div className="relative p-4 w-full max-w-lg max-h-full"> */}
-          {/* Modal content */}
-          <div className="relative bg-white rounded-lg shadow">
-            {/* Modal header */}
-            <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-              <h3 className="text-lg font-semibold text-gray-900">
-              Lend Your Game
-              </h3>
-              <button
-                type="button"
-                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                onClick={onClose} // Directly close the modal on click
-              >
-                <svg
-                  className="w-3 h-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 14"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                  />
-                </svg>
-                <span className="sr-only">Close modal</span>
-              </button>
+      {/* <div className="relative p-4 w-full max-w-lg max-h-full"> */}
+      {/* Modal content */}
+      <div className="relative bg-white rounded-lg shadow">
+        {/* Modal header */}
+        <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+          <h3 className="text-lg font-semibold text-gray-900">
+            Lend Your Game
+          </h3>
+        </div>
+
+        {/* Modal body */}
+        <form onSubmit={handleSubmit}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-4 px-4 md:px-10">
+            <div>
+              <label>Game Name</label>
+              <input
+                type="text"
+                name="gameName"
+                value={formData.gameName}
+                onChange={handleChange}
+                className="w-full p-2 border rounded-md"
+                required
+              />
             </div>
+            <div>
+              <label>Lending Period</label>
+              <input
+                type="number"
+                name="lendingPeriod"
+                value={formData.lendingPeriod}
+                onChange={handleChange}
+                className="w-full p-2 border rounded-md"
+                required
+              />
+            </div>
+          </div>
 
-            {/* Modal body */}
-            <form onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-4 px-4 md:px-10">
-                <div>
-                  <label>Game Name</label>
-                  <input
-                    type="text"
-                    name="gameName"
-                    value={formData.gameName}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded-md"
-                    required
-                  />
-                </div>
-                <div>
-                  <label>Lending Period</label>
-                  <input
-                    type="number"
-                    name="lendingPeriod"
-                    value={formData.lendingPeriod}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded-md"
-                    required
-                  />
-                </div>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-4 px-4 md:px-10">
+            <div>
+              <label>Tags (User can add upto 3 tags)</label>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-4 px-4 md:px-10">
-                <div>
-                  <label>Tags</label>
-                  <div className="flex items-center">
-                    <input
-                      type="text"
-                      name="tags"
-                      value={formData.tags}
-                      onChange={handleChange}
-                      className="w-full p-2 border rounded-md mr-2"
-                      placeholder="Enter a tag"
-                    />
-                    <button
-                      type="button"
-                      onClick={handleAddTag}
-                      className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                    >
-                      +
-                    </button>
-                  </div>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {tagsList.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="bg-gray-200 text-gray-800 px-2 py-1 rounded-full flex items-center"
-                      >
-                        {tag}
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveTag(tag)}
-                          className="ml-2 text-red-500"
-                        >
-                          x
-                        </button>
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label>Price</label>
-                  <input
-                    type="number"
-                    name="price"
-                    value={formData.price}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded-md"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="mb-4 px-4 md:px-10">
-                <label>About</label>
-                <textarea
-                  name="about"
-                  value={formData.about}
-                  onChange={handleAboutChange}
-                  className="w-full p-2 border rounded-md"
-                  rows="4"
-                  required
-                />
-              </div>
-
-              <div className="mb-4 px-4 md:px-10">
-                <label>Game Image</label>
+              <div className="flex items-center">
                 <input
-                  type="file"
-                  name="image"
+                  type="text"
+                  name="tags"
+                  value={formData.tags}
                   onChange={handleChange}
-                  className="w-full p-2 border rounded-md"
-                  accept="image/*"
-                  required
+                  className="w-full p-2 border rounded-md mr-2"
+                  placeholder="Enter a tag"
                 />
-              </div>
-             
-
-              <div className="mb-4 px-4 md:px-10">
-                <label>Category</label>
-                <select
-                  name="category"
-                  value={formData.category}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded-md"
-                  required
-                >
-                  <option value="">Select a category</option>
-                  <option value="Action">Action</option>
-                  <option value="RPG">RPG</option>
-                  <option value="Sports">Sports</option>
-                  <option value="Racing">Racing</option>
-                  <option value="Shooter">Shooter</option>
-                  <option value="Sci-Fi">Sci-Fi</option>
-                  <option value="Open World">Open World</option>
-                  <option value="Others">Others</option>
-                </select>
-              </div>
-              <div className="mb-4 px-4 md:px-10">
-                <input
-                  type="checkbox"
-                  name="termsAccepted"
-                  checked={formData.termsAccepted}
-                  onChange={handleChange}
-                  className="mr-2"
-                />
-                <label>I accept the terms and conditions</label>
-              </div>
-              <div className="flex justify-end pb-4 pr-2">
                 <button
                   type="button"
-                  className="bg-gray-300 px-4 py-2 mr-2 rounded-md"
-                  onClick={onClose}
+                  onClick={handleAddTag}
+                  className="bg-blue-500 text-white px-4 py-2 rounded-md"
                 >
-                  Cancel
-                </button>
-                {/* <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
-              Submit
-            </button> */}
-                <button
-                  type="submit"
-                  className={`bg-blue-500 text-white px-4 py-2 rounded-md flex items-center justify-center ${
-                    loading ? "cursor-not-allowed opacity-70" : ""
-                  }`}
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <>
-                      <svg
-                        className="w-5 h-5 mr-2 text-white animate-spin"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                        ></path>
-                      </svg>
-                      Loading...
-                    </>
-                  ) : (
-                    "Submit"
-                  )}
+                  +
                 </button>
               </div>
-            </form>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {tagsList.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="bg-gray-200 text-gray-800 px-2 py-1 rounded-full flex items-center"
+                  >
+                    {tag}
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveTag(tag)}
+                      className="ml-2 text-red-500"
+                    >
+                      x
+                    </button>
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label>Price</label>
+              <input
+                type="number"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                className="w-full p-2 border rounded-md"
+                required
+              />
+            </div>
           </div>
-        {/* </div> */}
+
+          <div className="mb-4 px-4 md:px-10">
+            <label>About (maximum 200 Characters)</label>
+            <p className="text-sm text-gray-500 mt-2">
+              {formData.about.length} characters written
+            </p>
+            <textarea
+              name="about"
+              value={formData.about}
+              onChange={handleAboutChange}
+              className="w-full p-2 border rounded-md"
+              rows="4"
+              required
+            />
+          </div>
+
+          <div className="mb-4 px-4 md:px-10">
+            <label>Game Image</label>
+            <input
+              type="file"
+              name="image"
+              onChange={handleChange}
+              className="w-full p-2 border rounded-md"
+              accept="image/*"
+              required
+            />
+          </div>
+
+          <div className="mb-4 px-4 md:px-10">
+            <label>Category</label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className="w-full p-2 border rounded-md"
+              required
+            >
+              <option value="">Select a category</option>
+              <option value="Action">Action</option>
+              <option value="RPG">RPG</option>
+              <option value="Sports">Sports</option>
+              <option value="Racing">Racing</option>
+              <option value="Shooter">Shooter</option>
+              <option value="Sci-Fi">Sci-Fi</option>
+              <option value="Open World">Open World</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+          <div className="mb-4 px-4 md:px-10">
+            <input
+              type="checkbox"
+              name="termsAccepted"
+              checked={formData.termsAccepted}
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <label>I accept the terms and conditions</label>
+          </div>
+          <div className="flex justify-end pb-4 pr-2">
+            <button
+              type="button"
+              className="bg-gray-300 px-4 py-2 mr-2 rounded-md"
+              onClick={onClose}
+            >
+              Cancel
+            </button>
+            {/* <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
+              Submit
+            </button> */}
+            <button
+              type="submit"
+              className={`bg-blue-500 text-white px-4 py-2 rounded-md flex items-center justify-center ${
+                loading ? "cursor-not-allowed opacity-70" : ""
+              }`}
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <svg
+                    className="w-5 h-5 mr-2 text-white animate-spin"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    ></path>
+                  </svg>
+                  Loading...
+                </>
+              ) : (
+                "Submit"
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
+      {/* </div> */}
       {/* </div> */}
     </>
   );

@@ -39,19 +39,6 @@ const UserProfile = () => {
   });
 
 
-  const handleSaveChangesNotification = () => {
-    setNotification({
-      visible: true,
-      message: "User Info changed successfully!",
-      type: "success",
-    });
-
-    setTimeout(() => {
-      setNotification((prev) => ({ ...prev, visible: false }));
-    }, 3000);
-
-    handleHideModal();
-  };
 
 
   const handleHideModal = () => setShowModal(false);
@@ -115,7 +102,7 @@ const UserProfile = () => {
         }
       );
 ;
-      handleSaveChangesNotification(response.data);
+      toast.success("Info Updated successfully ");
       localStorage.setItem("user_name", response.data.userName);
       localStorage.setItem("email", response.data.email);
       localStorage.setItem("firstName", response.data.firstName);

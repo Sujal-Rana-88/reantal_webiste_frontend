@@ -12,6 +12,7 @@ const UserLendGameHistory = () => {
       try {
         // Fetch data from the API endpoint
         const userId = localStorage.getItem("user_id");
+        console.log(userId);
         const requestData = {
           userId: userId,
         };

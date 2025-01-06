@@ -1,43 +1,54 @@
-import {React, useState} from "react";
+import { React, useState } from "react";
 import axios from "axios";
 import API_URLS from "../../config/urls";
-import {  toast } from "react-toastify";
-import {  useNavigate } from "react-router-dom";
-const Privacy = ({onClickHandle}) => {
-    const navigate = useNavigate();
-    const [delButton, setDelButton] = useState(false);
-    const userId = localStorage.getItem("user_id");
-    const confirmDelete = async () => {
-        // Here you would typically delete the user data
-        // setDelButton(false);
-        console.log(userId);
-        try {
-          const response = await axios.delete(
-            `${API_URLS.DELETE_ACCOUNT}?userId=${userId}`
-          );
-    
-          setDelButton(false);
-    
-          toast.success(response.data.message);
-    
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
-    
-          localStorage.removeItem("user_id");
-          localStorage.removeItem("token");
-          localStorage.removeItem("user_name");
-          localStorage.removeItem("email");
-          localStorage.removeItem("isAuthenticated");
-          localStorage.removeItem("firstName");
-          localStorage.removeItem("lastName");
-          localStorage.removeItem("profilePicture");
-        } catch (err) {
-          toast.error("Error: " + err.response.data.message);
-    
-          setDelButton(false);
-        }
-      };
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import ChangePasswordModal from "../../Pages/Profile/ChangePasswordModal";
+
+const Privacy = () => {
+  const navigate = useNavigate();
+  const [delButton, setDelButton] = useState(false);
+  const userId = localStorage.getItem("user_id");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  const confirmDelete = async () => {
+    // Here you would typically delete the user data
+    // setDelButton(false);
+    console.log(userId);
+    try {
+      const response = await axios.delete(
+        `${API_URLS.DELETE_ACCOUNT}?userId=${userId}`
+      );
+
+      setDelButton(false);
+
+      toast.success(response.data.message);
+
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+
+      localStorage.removeItem("user_id");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user_name");
+      localStorage.removeItem("email");
+      localStorage.removeItem("isAuthenticated");
+      localStorage.removeItem("firstName");
+      localStorage.removeItem("lastName");
+      localStorage.removeItem("profilePicture");
+    } catch (err) {
+      toast.error("Error: " + err.response.data.message);
+
+      setDelButton(false);
+    }
+  };
   return (
     <>
       <div className="space-y-6">
@@ -57,20 +68,22 @@ const Privacy = ({onClickHandle}) => {
             </button>
           </div>
           <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-            <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
-              Password
-            </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-              Change your password regularly to keep your account secure
-            </p>
-            <button className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-100 bg-white border border-gray-300 dark:bg-gray-700 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600">
-              Change Password
-            </button>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-10 mb-4">
-              Change your password regularly to keep your account secure
-            </p>
+            <div>
+              <button
+                onClick={handleOpenModal}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg"
+              >
+                Change Password
+              </button>
+
+              {/* ChangePasswordModal */}
+              <ChangePasswordModal
+                show={isModalOpen}
+                onClose={handleCloseModal}
+              />
+            </div>
             <button
-              className="px-4 py-2 text-sm font-medium text-black/80 dark:text-white bg-white border bg-red-500/75 border-gray-300 dark:bg-red-500/75 dark:border-gray-600 rounded-lg hover:bg-red-500/65 dark:hover:bg-red-500/50"
+              className="mt-10 px-4 py-2 text-sm font-medium text-black/80 dark:text-white bg-white border bg-red-500/75 border-gray-300 dark:bg-red-500/75 dark:border-gray-600 rounded-lg hover:bg-red-500/65 dark:hover:bg-red-500/50"
               onClick={() => setDelButton(true)}
             >
               Delete Account
@@ -105,7 +118,7 @@ const Privacy = ({onClickHandle}) => {
                   </div>
                   <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-center">
                     <button
-                      onClick={onClickHandle}
+                      onClick={() => setDelButton(false)}
                       className="inline-flex w-full items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 sm:w-auto"
                     >
                       Cancel

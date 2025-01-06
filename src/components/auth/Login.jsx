@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Navigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc"; // Import Google icon
 import backgroundImage from "../../assets/login_page.jpg";
 import API_URLS from "../../config/urls.js";
 
@@ -15,19 +16,18 @@ function Login() {
   if (isAuthenticated) {
     return <Navigate to="/" />;
   }
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     setMessage("");
 
     try {
-      // const response = await axios.post('http://192.168.43.140:5000/login', {
       const response = await axios.post(API_URLS.LOGIN, {
         userName,
-        password
+        password,
       });
 
-      // Store the token and set the authentication flag in local storage
       localStorage.setItem("token", response.data.access_token);
       localStorage.setItem("user_id", response.data.userId);
       localStorage.setItem("user_name", response.data.userName);
@@ -36,15 +36,17 @@ function Login() {
       localStorage.setItem("email", response.data.email);
       localStorage.setItem("isAuthenticated", "true");
       localStorage.setItem("profilePicture", response.data.profilePictureUrl);
-      console.log(response.data.profilePictureUrl);
 
       setMessage(response.data.message || "Login successful!");
-
-      // Navigate to the Home screen after successful login
       navigate("/home");
     } catch (error) {
       setError(error.response?.data?.error || "Something went wrong.");
     }
+  };
+
+  const handleGoogleLogin = () => {
+    // Add Google login logic here
+    console.log("Google login clicked");
   };
 
   return (
@@ -90,34 +92,19 @@ function Login() {
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
               </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      id="remember"
-                      type="checkbox"
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                    />
-                  </div>
-                  <label
-                    htmlFor="remember"
-                    className="ml-3 text-sm text-gray-500 dark:text-gray-300"
-                  >
-                    Remember me
-                  </label>
-                </div>
-                <a
-                  href="#"
-                  className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  Forgot password?
-                </a>
-              </div>
               <button
                 type="submit"
                 className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 Sign in
+              </button>
+              <button
+                type="button"
+                onClick={handleGoogleLogin}
+                className="w-full flex items-center justify-center mt-4 px-5 py-2.5 text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:bg-gray-600 dark:focus:ring-primary-800"
+              >
+                <FcGoogle className="mr-2" size={20} />
+                Sign in with Google
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}
@@ -133,43 +120,6 @@ function Login() {
         </div>
       </div>
     </section>
-
-    // <div className="flex h-screen bg-blue-500"> {/* Set background color here */}
-    //   <div className="flex-1 flex flex-col justify-center items-center p-6">
-    //     <h2 className="text-white text-2xl font-bold mb-4">Login</h2>
-    //     <form onSubmit={handleLogin} className="w-full max-w-xs">
-    //       <input
-    //         type="email"
-    //         placeholder="Email"
-    //         value={email}
-    //         onChange={(e) => setEmail(e.target.value)}
-    //         required
-    //         className="border border-gray-300 rounded-md p-2 mb-4 w-full"
-    //       />
-    //       <input
-    //         type="password"
-    //         placeholder="Password"
-    //         value={password}
-    //         onChange={(e) => setPassword(e.target.value)}
-    //         required
-    //         className="border border-gray-300 rounded-md p-2 mb-4 w-full"
-    //       />
-    //       <button type="submit" className="bg-blue-600 text-white rounded-md p-2 w-full hover:bg-blue-700">
-    //         Login
-    //       </button>
-    //     </form>
-    //     {error && <p className="text-red-500">{error}</p>}
-    //     {message && <p className="text-green-500">{message}</p>}
-    //     <button onClick={() => navigate('/signup')} className="text-blue-200 underline mt-4">
-    //       Don't have an account? Signup
-    //     </button>
-    //   </div>
-    //   <div
-    //     className="hidden lg:flex flex-1 bg-cover bg-center"
-    //     style={{ backgroundImage: `url(${backgroundImage})` }}
-    //   >
-    //   </div>
-    // </div>
   );
 }
 
