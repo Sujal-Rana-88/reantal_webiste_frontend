@@ -1,11 +1,9 @@
-import React, { useState,  useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import API_URLS from "../../config/urls";
 import { toast } from "react-toastify";
 
-import {
-  Camera
-} from "lucide-react";
+import { Camera } from "lucide-react";
 
 const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -19,14 +17,14 @@ const UserProfile = () => {
 
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [notification, setNotification] = useState({ visible: false });
+  const [rating, setRating] = useState(""); 
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("user_id");
   const profileUrl = localStorage.getItem("profilePicture");
   const [image, setImage] = useState(null);
 
   const fileInputRef = useRef(null);
-  
+
   const handleButtonClick = () => {
     // Trigger the hidden file input click
     fileInputRef.current.click();
@@ -37,9 +35,6 @@ const UserProfile = () => {
     lastName: lastName,
     image: null,
   });
-
-
-
 
   const handleHideModal = () => setShowModal(false);
 
@@ -69,6 +64,37 @@ const UserProfile = () => {
       }
     }
   };
+
+  // find current rating
+
+  useEffect(() => {
+    const fetchGames = async () => {
+      try {
+        const userId = localStorage.getItem("user_id");
+        const token = localStorage.getItem("token");
+        console.log(userId);
+        const requestData = { userId };
+
+        const response = await axios.post(API_URLS.FETCH_USER_RATING, requestData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.data && response.data.length > 0) {
+          setRating(response.data[0].rating);
+        } else {
+          setRating(0);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGames();
+  }, []);
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -101,7 +127,6 @@ const UserProfile = () => {
           },
         }
       );
-;
       toast.success("Info Updated successfully ");
       localStorage.setItem("user_name", response.data.userName);
       localStorage.setItem("email", response.data.email);
@@ -172,6 +197,7 @@ const UserProfile = () => {
                   )}
                 </div>
               </div>
+
               <div className="flex-1 w-full space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
@@ -276,9 +302,32 @@ const UserProfile = () => {
               />
               <div className="flex-1 space-y-4">
                 <div>
-                  <h3 className="text-2xl font-medium text-gray-900 dark:text-white">
-                    {name}
-                  </h3>
+                  <div className="flex items-center">
+                    <h3 className="text-2xl font-medium text-gray-900 dark:text-white">
+                      {firstName} {lastName}
+                    </h3>
+                    <div className="flex items-center ms-4">
+                      <svg
+                        className="w-4 h-4 text-yellow-300 me-1"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 22 20"
+                      >
+                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                      </svg>
+                      <p className="ms-2 text-sm font-bold text-gray-900 dark:text-white">
+                        {rating}
+                      </p>
+                      <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                      <a
+                        href="#"
+                        className="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white"
+                      >
+                        73 reviews
+                      </a>
+                    </div>
+                  </div>
                   <p className="text-gray-500">{email}</p>
                 </div>
               </div>

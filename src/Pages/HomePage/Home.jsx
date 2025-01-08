@@ -18,7 +18,7 @@ function Home() {
       try {
         const userId = localStorage.getItem("user_id");
         const token = localStorage.getItem("token");
-
+        console.log(userId);
         const requestData = { userId };
 
         const response = await axios.post(API_URLS.FETCH_GAMES, requestData, {
