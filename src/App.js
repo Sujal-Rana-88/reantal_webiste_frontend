@@ -15,24 +15,34 @@ import LendGameHistory from "./Pages/LendGamesHistory/LendGameHistory";
 import VerifyEmail from "./components/auth/VerifyEmail";
 import MoreGames from "./Pages/MoreGames/MoreGames";
 import MyAccount from "./Pages/Profile/MyAccount";
+import OAuthRegsiterScreen from "./components/auth/OAuthRegsiterScreen";
 
 const isAuthenticated = () => {
-  return JSON.parse(localStorage.getItem('isAuthenticated')) === true; 
+  return JSON.parse(localStorage.getItem("isAuthenticated")) === true;
 };
 
 function App() {
+  const redirectToRegister =
+    localStorage.getItem("redirectToRegister") === "true";
+
   return (
     <Routes>
-      <Route 
-        path="/" 
-        element={isAuthenticated() ? <Navigate to="/home" /> : <UnauthorizedHome />} 
+      {/* Handle OAuth redirection */}
+      {redirectToRegister && (
+        <Route path="/auth/google/register" element={<OAuthRegsiterScreen />} />
+      )}
+
+      <Route
+        path="/"
+        element={
+          isAuthenticated() ? <Navigate to="/home" /> : <UnauthorizedHome />
+        }
       />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/verifyEmail" element={<VerifyEmail />} />
 
-
-      {/* Protect the Home route */}
+      {/* Protected routes */}
       <Route
         path="/home"
         element={
@@ -97,6 +107,8 @@ function App() {
           </ProtectedRoute>
         }
       />
+
+      {/* 404 Not Found */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

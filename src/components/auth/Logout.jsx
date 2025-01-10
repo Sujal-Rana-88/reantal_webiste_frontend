@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import {React, useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
 const Logout = ({onClickHandle}) => {
@@ -11,6 +11,13 @@ const [theme, setTheme] = useState(() => {
   }
   return "light";
 });
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
 const confirmLogout = () => {
   setTimeout(() => {
@@ -25,6 +32,7 @@ const confirmLogout = () => {
   }, 200); // Small delay to reduce blocking
   setShowLogoutModal(false);
   navigate("/");
+  // setTheme(theme ===  'dark');
 };
 
   return (

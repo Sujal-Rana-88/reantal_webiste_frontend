@@ -17,6 +17,9 @@ const API_URLS = {
   UPDATE_INFO: `${BASE_URL}/user/settings`,
   UPDATE_PASSWORD: `${BASE_URL}/changepassword`,
   FETCH_USER_INFO: `${BASE_URL}/getUser`,
+  FETCH_USER_RATING: `${BASE_URL}/user/ratings`,
+  GOOGLE_OAUTH_EMAIL: `${BASE_URL}/auth/google/checkemail`,
+  GOOGLE_OAUTH_REGISTER: `${BASE_URL}/auth/google/register`,
 };
 
 export default API_URLS;
