@@ -14,6 +14,7 @@ function Home() {
   const [visibleGames, setVisibleGames] = useState(10); // Number of games to display initially
 
   useEffect(() => {
+    localStorage.setItem("redirectToRegister", "false");
     const fetchGames = async () => {
       try {
         const userId = localStorage.getItem("user_id");

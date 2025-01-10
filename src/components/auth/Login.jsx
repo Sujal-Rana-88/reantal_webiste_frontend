@@ -4,14 +4,21 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc"; // Import Google icon
 import backgroundImage from "../../assets/login_page.jpg";
 import API_URLS from "../../config/urls.js";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "./firebase.js";
 
 function Login() {
-  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [image, setImage] = useState(null);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const isAuthenticated = localStorage.getItem("isAuthenticated");
+  const [load, setLoad] = useState(false);
 
   if (isAuthenticated) {
     return <Navigate to="/" />;
@@ -36,7 +43,7 @@ function Login() {
       localStorage.setItem("email", response.data.email);
       localStorage.setItem("isAuthenticated", "true");
       localStorage.setItem("profilePicture", response.data.profilePictureUrl);
-
+      
       setMessage(response.data.message || "Login successful!");
       navigate("/home");
     } catch (error) {
@@ -44,10 +51,63 @@ function Login() {
     }
   };
 
-  const handleGoogleLogin = () => {
-    // Add Google login logic here
-    console.log("Google login clicked");
-  };
+
+const handleGoogleLogin = async () => {
+  const provider = new GoogleAuthProvider();
+  try {
+    const res = await signInWithPopup(auth, provider);
+
+    // Extract user data after successful Google login
+    const { displayName, email, photoURL, uid } = res.user;
+
+    const [firstName, ...lastNameArray] = displayName?.split(" ") || [];
+    const lastName = lastNameArray.join(" ");
+      localStorage.setItem("user_name", displayName);
+      localStorage.setItem("firstName", firstName);
+      localStorage.setItem("lastName", lastName);
+      localStorage.setItem("email", email);
+    setEmail(email);
+    setUserName(displayName);
+    setFirstName(firstName);
+    setLastName(lastName);
+
+    const formData = new FormData();
+    formData.append("email", email);
+
+    if (image) {
+      formData.append("image", image);
+    }
+
+    localStorage.setItem("redirectToRegister", "true");
+    const response = await axios.post(API_URLS.GOOGLE_OAUTH_EMAIL, formData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
+    if (response.status === 200) {
+      // Store authentication details
+      localStorage.setItem("token", response.data.access_token);
+      localStorage.setItem("user_id", response.data.userId);
+      localStorage.setItem("user_name", response.data.userName);
+      localStorage.setItem("firstName", response.data.firstName);
+      localStorage.setItem("lastName", response.data.lastName);
+      localStorage.setItem("email", response.data.email);
+      localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("profilePicture", response.data.profilePictureUrl);
+
+      navigate("/home");
+    }
+  } catch (err) {
+    
+    // Navigate to the register page and set a flag
+    navigate("/auth/google/register");
+
+    setError(err.response?.data?.message || err.message || "Something went wrong.");
+  }
+};
+
+  
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900 h-screen flex items-center justify-center">
@@ -119,6 +179,9 @@ function Login() {
           </div>
         </div>
       </div>
+
+
+
     </section>
   );
 }

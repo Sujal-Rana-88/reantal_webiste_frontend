@@ -31,7 +31,7 @@ const confirmLogout = () => {
     localStorage.removeItem("profilePicture");
   }, 200); // Small delay to reduce blocking
   setShowLogoutModal(false);
-  navigate("/",  { replace: true });
+  navigate("/");
   // setTheme(theme ===  'dark');
 };
 
