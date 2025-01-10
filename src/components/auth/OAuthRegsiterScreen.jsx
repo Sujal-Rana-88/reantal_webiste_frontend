@@ -262,5 +262,5 @@ const OAuthRegsiterScreen = () => {
     </section>
   );
 };
-
+ 
 export default OAuthRegsiterScreen;
