@@ -100,10 +100,10 @@ const handleGoogleLogin = async () => {
     }
   } catch (err) {
     
-    // Navigate to the register page and set a flag
-    navigate("/auth/google/register");
-
-    setError(err.response?.data?.message || err.message || "Something went wrong.");
+    setTimeout(() => {
+      navigate("/auth/google/register");
+    }, 2000);
+    setError("Account Doesnt exist.");
   }
 };
 

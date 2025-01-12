@@ -30,11 +30,6 @@ const Privacy = () => {
       setDelButton(false);
 
       toast.success(response.data.message);
-
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
-
       localStorage.removeItem("user_id");
       localStorage.removeItem("token");
       localStorage.removeItem("user_name");
@@ -43,6 +38,9 @@ const Privacy = () => {
       localStorage.removeItem("firstName");
       localStorage.removeItem("lastName");
       localStorage.removeItem("profilePicture");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     } catch (err) {
       toast.error("Error: " + err.response.data.message);
 
